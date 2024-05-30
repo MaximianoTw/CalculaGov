@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +25,7 @@ public class SignupActivity extends AppCompatActivity {
         editTextCPF = findViewById(R.id.editTextCPF);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonSignup = findViewById(R.id.buttonSignup);
+        Button buttonVoltarSignUp = findViewById(R.id.VoltarSingUp); // Referência ao botão VoltarSignUp
 
         sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
 
@@ -43,5 +45,13 @@ public class SignupActivity extends AppCompatActivity {
                 finish(); // Volta para a tela de login
             }
         });
-    }
-}
+
+        buttonVoltarSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Voltar para a MainActivity
+                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                finish(); // Finaliza a SignupActivity
+            }
+        });
+    }}

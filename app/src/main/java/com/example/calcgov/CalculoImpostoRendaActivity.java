@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +29,17 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         editTextDeducoes = findViewById(R.id.editTextDeducoes);
         buttonCalcular = findViewById(R.id.buttonCalcular);
 
+        Button buttonVoltarHome = findViewById(R.id.VoltarHome);
+        buttonVoltarHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicia a HomeActivity
+                Intent intent = new Intent(CalculoImpostoRendaActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         buttonCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,31 +49,23 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
     }
 
     private void calcularImposto() {
-        // Recuperar os valores dos campos
         String rendaString = editTextRenda.getText().toString();
         String deducoesString = editTextDeducoes.getText().toString();
 
-        // Verificar se os campos estão vazios
         if (rendaString.isEmpty() || deducoesString.isEmpty()) {
             Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Converter os valores para números
         double rendaMensal = Double.parseDouble(rendaString);
         double deducoesMensais = Double.parseDouble(deducoesString);
 
-        // Calcular a renda e as deduções anuais
         double rendaAnual = rendaMensal * 12;
         double deducoesAnuais = deducoesMensais * 12;
 
-        // Calculando o imposto de renda anual
         double impostoAnual = calcularImpostoDeRenda(rendaAnual, deducoesAnuais);
-
-        // Calculando o imposto de renda mensal
         double impostoMensal = impostoAnual / 12;
 
-        // Formatando os números com o local padrão do Brasil
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
         format.setMinimumFractionDigits(2);
         format.setMaximumFractionDigits(2);
@@ -73,7 +77,6 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         String impostoMensalFormatado = format.format(impostoMensal);
         String impostoAnualFormatado = format.format(impostoAnual);
 
-        // Exibir o resultado em uma popup
         exibirPopup("Resultado do Imposto de Renda", rendaMensalFormatada, rendaAnualFormatada,
                 deducoesMensaisFormatadas, deducoesAnuaisFormatadas, impostoMensalFormatado, impostoAnualFormatado);
     }

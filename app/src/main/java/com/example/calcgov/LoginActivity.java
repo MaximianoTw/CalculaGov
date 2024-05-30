@@ -43,6 +43,12 @@ public class LoginActivity extends AppCompatActivity {
                 String cpf = editTextCPF.getText().toString();
                 String password = editTextPassword.getText().toString();
 
+                // Verifica se algum dos campos está vazio
+                if (cpf.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
+                    return; // Sai do método onClick
+                }
+
                 // Verifica se o CPF e senha correspondem aos salvos
                 String savedPassword = sharedPreferences.getString(cpf, "");
                 if (savedPassword.equals(password)) {

@@ -17,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="CPF"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:maxLength="11" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -31,5 +32,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cadastrar"/>
+
+    <Button
+        android:id="@+id/VoltarSingUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar" />
 
 </LinearLayout>

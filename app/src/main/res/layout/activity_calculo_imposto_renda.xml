@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".CalculoImpostoRendaActivity">
 
@@ -12,16 +13,15 @@
         android:layout_height="wrap_content"
         android:text="Renda Mensal (R$):"
         android:textSize="16sp"
-        android:layout_marginTop="16dp"/>
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextRenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
         android:hint="Informe sua renda mensal"
-        android:layout_below="@id/textViewRenda"
-        android:layout_marginTop="8dp"/>
+        android:inputType="numberDecimal"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textViewDeducoes"
@@ -29,26 +29,29 @@
         android:layout_height="wrap_content"
         android:text="Deduções (R$):"
         android:textSize="16sp"
-        android:layout_below="@id/editTextRenda"
-        android:layout_marginTop="16dp"/>
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextDeducoes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
         android:hint="Informe suas deduções"
-        android:layout_below="@id/textViewDeducoes"
-        android:layout_marginTop="8dp"/>
+        android:inputType="numberDecimal"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/buttonCalcular"
+        android:layout_width="366dp"
+        android:layout_height="wrap_content"
+        android:onClick="calcularImposto"
+        android:text="Calcular Imposto"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/VoltarHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calcular Imposto"
-        android:layout_below="@id/editTextDeducoes"
-        android:layout_marginTop="16dp"
-        android:layout_alignParentEnd="true"
-        android:onClick="calcularImposto"/>
+        android:text="voltar" />
 
-</RelativeLayout>
+
+</LinearLayout>
