@@ -1,6 +1,6 @@
 **Calculadora de Impostos - CALCULAGOV - App Android Studio**
 
-![image](https://github.com/MaximianoTw/CalculaGov/assets/88588771/0ab5aea5-b07f-46c1-b724-0103cbe3f404){ width=250px }
+<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/0ab5aea5-b07f-46c1-b724-0103cbe3f404" width="250">
 
 ---
 
@@ -23,24 +23,24 @@ Este é um aplicativo Android desenvolvido no Android Studio para calcular impos
 ## Screenshots
 
 ### Tela de Login
-![image](https://github.com/MaximianoTw/CalculaGov/assets/88588771/a887b1e8-cfc0-4ba2-8ec8-65f8a3e2f20a){ width=250px }
+<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/a887b1e8-cfc0-4ba2-8ec8-65f8a3e2f20a" width="250">
 
 ### Tela de Cadastro
-![image](https://github.com/MaximianoTw/CalculaGov/assets/88588771/41192dfd-cced-4fdc-9487-bf5768ccec6f){ width=250px }
+<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/41192dfd-cced-4fdc-9487-bf5768ccec6f" width="250">
 
 ### Tela de Opções de Impostos
-![image](https://github.com/MaximianoTw/CalculaGov/assets/88588771/4bf1d0b9-d39e-4b9f-bf43-06b65e3182e2){ width=250px }
+<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/4bf1d0b9-d39e-4b9f-bf43-06b65e3182e2" width="250">
 
 ### Tela de Cálculo do Imposto de Renda
-![image](https://github.com/MaximianoTw/CalculaGov/assets/88588771/568cdd74-3e3c-427d-b54d-3d4087b3dc74){ width=250px }
+<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/568cdd74-3e3c-427d-b54d-3d4087b3dc74" width="250">
 
 ### Respostas do Cálculo de Imposto
 
 #### Quando não paga imposto
-![image](https://github.com/MaximianoTw/CalculaGov/assets/88588771/74834ab2-38fb-4e3f-b21e-dcadf8eaac7e){ width=250px }
+<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/74834ab2-38fb-4e3f-b21e-dcadf8eaac7e" width="250">
 
 #### Quando paga imposto
-![image](https://github.com/MaximianoTw/CalculaGov/assets/88588771/674e86df-fbe3-4d04-96e5-c48cd6e5e8ac){ width=250px }
+<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/674e86df-fbe3-4d04-96e5-c48cd6e5e8ac" width="250">
 
 ## Como Usar
 
