@@ -54,8 +54,8 @@ Este é um aplicativo Android desenvolvido no Android Studio para calcular impos
 ## Autor
 
 Este aplicativo foi desenvolvido por 
-[João Victor](https://github.com/sorrisojoa)
-[Felipe Maximiano](https://github.com/MaximianoTw).
+[João Victor](https://github.com/sorrisojoa),
+[Felipe Maximiano](https://github.com/MaximianoTw),
 [Lucas Lira](https://github.com/Liracodelic).
 
 ## Licença

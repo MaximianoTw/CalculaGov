@@ -3,24 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageButton
-        android:id="@+id/irenda"
-        android:layout_width="325dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="120dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/irenda" />
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FEFEFE">
 
     <ImageButton
         android:id="@+id/iptu"
         android:layout_width="325dp"
         android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ipva"
         app:srcCompat="@drawable/iptu" />
@@ -29,18 +21,38 @@
         android:id="@+id/ipva"
         android:layout_width="325dp"
         android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/irenda"
         app:srcCompat="@drawable/ipva" />
 
+    <ImageButton
+        android:id="@+id/irenda"
+        android:layout_width="325dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="260dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/irenda" />
+
     <Button
         android:id="@+id/VoltarHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="101dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#000BAC"
         android:text="Voltar"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="667dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="31dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="378dp"
+        android:layout_height="226dp"
+        app:srcCompat="@drawable/calcgovlogo"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
