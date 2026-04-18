@@ -1,63 +1,57 @@
-**Calculadora de Impostos - CALCULAGOV - App Android Studio**
-
-<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/0ab5aea5-b07f-46c1-b724-0103cbe3f404" width="250">
-
----
-
-## Descrição
-
-Este é um aplicativo Android desenvolvido no Android Studio para calcular impostos. Ele oferece funcionalidades como tela de login, cadastro de usuários com validação, opções para calcular diferentes tipos de impostos e uma calculadora de Imposto de Renda.
-
-## Funcionalidades
-
-- **Tela de Login:** Os usuários podem fazer login em suas contas para acessar as funcionalidades do aplicativo.
-  
-- **Cadastro de Usuários:** Permite que novos usuários se cadastrem no aplicativo. Inclui validação de dados para garantir informações precisas.
-
-- **Opções de Impostos:** Oferece uma variedade de opções para calcular diferentes tipos de impostos, proporcionando uma experiência personalizada para o usuário.
-
-- **Calculadora de Imposto de Renda:** Uma funcionalidade central do aplicativo, onde os usuários podem calcular seu imposto de renda com base em suas informações financeiras.
-
-- **Banco de Dados Local:** Todos os dados dos usuários são armazenados localmente no dispositivo, garantindo segurança e privacidade dos dados.
-
-## Screenshots
-
-### Tela de Login
-<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/a887b1e8-cfc0-4ba2-8ec8-65f8a3e2f20a" width="250">
-
-### Tela de Cadastro
-<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/41192dfd-cced-4fdc-9487-bf5768ccec6f" width="250">
-
-### Tela de Opções de Impostos
-<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/4bf1d0b9-d39e-4b9f-bf43-06b65e3182e2" width="250">
-
-### Tela de Cálculo do Imposto de Renda
-<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/568cdd74-3e3c-427d-b54d-3d4087b3dc74" width="250">
-
-### Respostas do Cálculo de Imposto
-
-#### Quando não paga imposto
-<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/74834ab2-38fb-4e3f-b21e-dcadf8eaac7e" width="250">
-
-#### Quando paga imposto
-<img src="https://github.com/MaximianoTw/CalculaGov/assets/88588771/674e86df-fbe3-4d04-96e5-c48cd6e5e8ac" width="250">
-
-## Como Usar
-
-1. Clone este repositório para o seu ambiente local.
-2. Abra o projeto no Android Studio.
-3. Execute o aplicativo em um emulador ou dispositivo Android.
-4. Explore as diferentes funcionalidades e recursos.
-
-## Contribuindo
-
-## Autor
-
-Este aplicativo foi desenvolvido por 
-[João Victor](https://github.com/sorrisojoa),
-[Felipe Maximiano](https://github.com/MaximianoTw),
-[Lucas Lira](https://github.com/Liracodelic).
-
-## Licença
-
-Este projeto está licenciado sob a CalculaGov.
+🇧🇷 CalculaGov - Seu Contador Digital IRPF 2024
+O CalculaGov é um aplicativo Android moderno e seguro, desenvolvido para simplificar a vida do cidadão brasileiro na hora de lidar com o Imposto de Renda. Com um design inspirado no portal gov.br, o app oferece uma experiência profissional, intuitiva e totalmente privada.
+🚀 Principais Funcionalidades
+•
+Identidade Visual Oficial: Interface limpa seguindo o padrão de design do Governo Federal (azul #1351b4, ouro #FFCC00).
+•
+Simulador Completo IRPF 2024: Cálculos precisos baseados na tabela vigente, considerando rendas, dependentes, previdência e despesas dedutíveis.
+•
+Perfil Inteligente: Cadastre seus dados uma única vez e preencha simulações com apenas um clique.
+•
+Histórico de Cálculos: Mantenha um registro de todas as suas simulações passadas para comparação.
+•
+Geração de PDF: Exporte o resumo detalhado do seu cálculo para um recibo digital profissional.
+•
+Privacidade Total: Seus dados sensíveis (CPF, Renda) são armazenados apenas localmente no seu dispositivo.
+📸 Guia de Uso (Passo a Passo)
+1. Acesso e Segurança
+Ao abrir o app, você encontrará uma Landing Page profissional. No primeiro acesso, crie sua conta na aba "Criar Conta".
+•
+Dica: Preencha sua renda e dependentes já no cadastro para ativar o preenchimento automático.
+2. Home - Área do Cidadão
+A tela inicial te recebe pelo nome e mostra um resumo do seu último cálculo realizado. Se seu perfil estiver incompleto, um alerta amarelo te lembrará de atualizá-lo.
+•
+Botão Central: Clique em "Simulador de Imposto de Renda" para começar.
+3. Simulador Inteligente
+Aqui acontece a mágica. Você pode:
+1.
+Clicar em "Preencher com meu perfil" para carregar seus dados salvos.
+2.
+Inserir manualmente outras rendas ou deduções (saúde, educação).
+3.
+Clicar em "Realizar Cálculo Profissional".
+4. Resultado e Recibo
+O app apresenta um parecer detalhado.
+•
+Verde: Valor a restituir (dinheiro de volta!).
+•
+Vermelho: Valor a pagar.
+•
+Botão PDF: Clique para baixar o relatório completo e conferir com sua declaração oficial.
+5. Histórico e Perfil
+Use a barra de navegação inferior para:
+•
+Histórico: Ver cards coloridos de todas as simulações feitas.
+•
+Perfil: Atualizar seus dados pessoais a qualquer momento.
+🛠️ Tecnologias Utilizadas
+•
+Linguagem: Java (Android Studio)
+•
+UI/UX: Material Design 3 (Google)
+•
+Persistência: SharedPreferences (Segurança local)
+•
+Documentação: iText7 (Geração de PDFs)
+•
+Estrutura: CoordinatorLayout, BottomNavigationView, NestedScrollView.
