@@ -8,7 +8,7 @@ O **CalculaGov** é um assistente inteligente para cálculos de Imposto de Renda
 
 - **Visual Oficial gov.br:** Interface familiar e confiável, utilizando os padrões de design do Governo Federal.
 - **Perfil Inteligente:** Salve seus dados (Nome, Renda, Dependentes) uma única vez e preencha simuladores automaticamente.
-- **Cálculo Profissional:** Algoritmo atualizado com a tabela de IRPF 2024, considerando todas as deduções legais.
+- **Cálculo Profissional:** Algoritmo atualizado com a tabela de IRPF 2026, considerando todas as deduções legais.
 - **Histórico de Simulações:** Acompanhe a evolução dos seus cálculos com cards coloridos (Verde para restituição, Vermelho para imposto).
 - **Relatório em PDF:** Gere um recibo digital detalhado com um clique para conferência posterior.
 - **Privacidade Local:** Seus dados financeiros são sensíveis e, por isso, ficam armazenados **apenas no seu celular**.
