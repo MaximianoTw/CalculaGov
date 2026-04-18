@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation("com.itextpdf:itext7-core:7.2.5")
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

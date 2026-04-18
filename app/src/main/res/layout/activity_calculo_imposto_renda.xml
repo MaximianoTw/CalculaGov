@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Simulador Completo IRPF 2024"
+                android:text="Simulador Completo IRPF 2026"
                 android:textColor="@color/gov_blue"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -61,6 +61,30 @@
                 android:textColor="@color/gov_blue"
                 app:icon="@android:drawable/ic_menu_myplaces"
                 app:strokeColor="@color/gov_blue" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggleGroupPeriodo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                app:checkedButton="@+id/btnMensal">
+                <Button
+                    android:id="@+id/btnMensal"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Simulação Mensal" />
+                <Button
+                    android:id="@+id/btnAnual"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Declaração Anual" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -107,32 +131,63 @@
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="12dp"/>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Salário Mensal (Valor Bruto)"
-                        app:helperText="O valor total antes dos descontos. Veja no seu informe anual ou holerite.">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextRenda"
-                            android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:hint="Salário Mensal (Valor Bruto)"
+                            app:helperText="O valor total antes dos descontos.">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextRenda"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ImageButton
+                            android:id="@+id/btnEvidenciaRenda"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@android:drawable/ic_menu_camera"
+                            app:tint="@color/gov_blue"
+                            android:contentDescription="Anexar contracheque" />
+                    </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:hint="Outros Ganhos (Extras)"
-                        app:helperText="Soma de aluguéis recebidos, freelancers ou bônus.">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextOutrosRendimentos"
-                            android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:hint="Outros Ganhos (Extras)">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextOutrosRendimentos"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ImageButton
+                            android:id="@+id/btnEvidenciaOutros"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@android:drawable/ic_menu_camera"
+                            app:tint="@color/gov_blue"
+                            android:contentDescription="Anexar comprovante de outros ganhos" />
+                    </LinearLayout>
 
                     <!-- SEÇÃO 3: DEDUÇÕES -->
                     <TextView
@@ -171,33 +226,64 @@
                             android:inputType="number" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="Gastos com Saúde"
-                        app:helperText="Ex: Plano de saúde, dentista, médicos e exames (guarde os recibos).">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextSaude"
-                            android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:hint="Gastos com Saúde"
+                            app:helperText="Ex: Plano de saúde, dentista, médicos.">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextSaude"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ImageButton
+                            android:id="@+id/btnEvidenciaSaude"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@android:drawable/ic_menu_camera"
+                            app:tint="@color/gov_blue"
+                            android:contentDescription="Anexar recibo médico" />
+                    </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:hint="Educação ou Pensão Paga"
-                        app:helperText="Ex: Escola, Faculdade ou Pensão Alimentícia definida por juiz.">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextEduPensao"
-                            android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:hint="Educação ou Pensão Paga"
+                            app:helperText="Ex: Escola, Faculdade ou Pensão.">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextEduPensao"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ImageButton
+                            android:id="@+id/btnEvidenciaEdu"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@android:drawable/ic_menu_camera"
+                            app:tint="@color/gov_blue"
+                            android:contentDescription="Anexar boleto escolar" />
+                    </LinearLayout>
 
                     <!-- SEÇÃO 4: IMPOSTO PAGO -->
                     <TextView
