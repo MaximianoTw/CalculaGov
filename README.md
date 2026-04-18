@@ -1,4 +1,4 @@
-# 🇧🇷 CalculaGov - Seu Contador Digital IRPF 2024
+# 🇧🇷 CalculaGov - Seu Contador Digital IRPF 2026
 
 O **CalculaGov** é um assistente inteligente para cálculos de Imposto de Renda Pessoa Física (IRPF), desenvolvido com a identidade visual oficial do portal **gov.br**. Ele transforma a complexidade do leão em um processo simples, rápido e seguro.
 
