@@ -73,12 +73,4 @@ Use a barra de navegação inferior para:
 - **Estrutura:** CoordinatorLayout, BottomNavigationView, NestedScrollView.
 
 ---
-
-## 👥 Autores
-Este projeto foi desenvolvido com foco em acessibilidade e transparência fiscal por:
-- [Felipe Maximiano](https://github.com/MaximianoTw)
-- [João Victor](https://github.com/sorrisojoa)
-- [Lucas Lira](https://github.com/Liracodelic)
-
----
 *Este aplicativo é um simulador para fins informativos e não substitui a declaração oficial no programa da Receita Federal.*
