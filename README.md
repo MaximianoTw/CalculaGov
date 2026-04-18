@@ -1,66 +1,84 @@
 # 🇧🇷 CalculaGov - Seu Contador Digital IRPF 2026
 
-O **CalculaGov** é um assistente inteligente para cálculos de Imposto de Renda Pessoa Física (IRPF), desenvolvido com a identidade visual oficial do portal **gov.br**. Ele transforma a complexidade do leão em um processo simples, rápido e seguro.
+O **CalculaGov** é um aplicativo Android moderno e seguro, desenvolvido para simplificar a vida do cidadão brasileiro na hora de lidar com o Imposto de Renda. Com um design inspirado no portal **gov.br**, o app oferece uma experiência profissional, intuitiva e totalmente privada.
 
 ---
 
-## 🚀 Funcionalidades Principais
+## 🚀 Principais Funcionalidades
 
-- **Visual Oficial gov.br:** Interface familiar e confiável, utilizando os padrões de design do Governo Federal.
-- **Perfil Inteligente:** Salve seus dados (Nome, Renda, Dependentes) uma única vez e preencha simuladores automaticamente.
-- **Cálculo Profissional:** Algoritmo atualizado com a tabela de IRPF 2026, considerando todas as deduções legais.
-- **Histórico de Simulações:** Acompanhe a evolução dos seus cálculos com cards coloridos (Verde para restituição, Vermelho para imposto).
-- **Relatório em PDF:** Gere um recibo digital detalhado com um clique para conferência posterior.
-- **Privacidade Local:** Seus dados financeiros são sensíveis e, por isso, ficam armazenados **apenas no seu celular**.
-
----
-
-## 📸 Guia Visual e Operação
-
-### 1. Cadastro e Login
-Para começar, crie sua conta informando seu nome e dados básicos. O app utiliza seu CPF como identificador único para salvar suas preferências.
-> **Dica:** Preencha a renda bruta e o número de dependentes logo no cadastro para economizar tempo depois!
-
-*(Placeholder para imagem da tela de Login/Cadastro)*
-
-### 2. Home (Área do Cidadão)
-A tela inicial é personalizada com seu nome e mostra um resumo do seu último cálculo realizado, para que você tenha a informação que importa sempre à mão.
-*   **Alerta de Perfil:** Se esquecer de preencher algum dado importante, o app avisará você aqui.
-
-*(Placeholder para imagem da Home Personalizada)*
-
-### 3. Simulador de Imposto de Renda
-Nesta tela, você tem duas opções:
-- **Modo Automático:** Clique em "Preencher com meu perfil" e o app carrega seus dados instantaneamente.
-- **Modo Manual:** Digite rendas extras, gastos com saúde ou educação conforme seus recibos.
-
-*(Placeholder para imagem do Formulário de Cálculo)*
-
-### 4. Resultado Detalhado e Exportação
-Após o cálculo, você verá o parecer do "Contador Digital". Se o resultado for **Restituição**, o card ficará em destaque. 
-*   **Gerar Recibo:** Use o botão de PDF para salvar o resumo detalhado na pasta de Documentos do seu celular.
-
-*(Placeholder para imagem do Resultado e PDF)*
-
-### 5. Histórico e Gestão de Perfil
-- **Histórico:** Navegue por todas as simulações já feitas.
-- **Perfil:** Atualize sua renda ou dependentes sempre que houver mudanças na sua vida financeira.
-
-*(Placeholder para imagens das abas Histórico e Perfil)*
+- **Identidade Visual Oficial:** Interface limpa seguindo o padrão de design do Governo Federal (azul `#1351b4`, ouro `#FFCC00`).
+- **Simulador Completo IRPF 2026:** Cálculos precisos baseados na tabela vigente, considerando rendas, dependentes, previdência e despesas dedutíveis.
+- **Perfil Inteligente:** Cadastre seus dados uma única vez e preencha simulações com apenas um clique.
+- **Histórico de Cálculos:** Mantenha um registro de todas as suas simulações passadas para comparação.
+- **Geração de PDF:** Exporte o resumo detalhado do seu cálculo para um recibo digital profissional.
+- **Privacidade Total:** Seus dados sensíveis (CPF, Renda) são armazenados **apenas localmente** no seu dispositivo.
 
 ---
 
-## 🛠️ Como Instalar e Rodar
+## 📸 Guia de Uso (Screenshots)
 
-1.  **Clone o projeto:** `git clone https://github.com/MaximianoTw/CalculaGov.git`
-2.  **Abra no Android Studio:** Certifique-se de ter o SDK 34 (Android 14) instalado.
-3.  **Dependências:** O app utiliza `iText7` para PDFs e `Material Design 3`. O Gradle sincronizará tudo automaticamente.
-4.  **Execução:** Rode em um emulador ou dispositivo físico com Android 7.0 (API 24) ou superior.
+### 1. Acesso e Segurança
+Ao abrir o app, você encontrará uma Landing Page profissional. No primeiro acesso, crie sua conta na aba **"Criar Conta"**.
+*   **Dica:** Preencha sua renda e dependentes já no cadastro para ativar o preenchimento automático.
+
+*(Insira aqui a imagem da tela de Login/Cadastro)*
+
+### 2. Home - Área do Cidadão
+A tela inicial te recebe pelo nome e mostra um resumo do seu último cálculo realizado. Se seu perfil estiver incompleto, um alerta amarelo te lembrará de atualizá-lo.
+*   **Botão Central:** Clique em "Simulador de Imposto de Renda" para começar.
+
+*(Insira aqui a imagem da Home personalizada)*
+
+### 3. Simulador Inteligente
+Aqui acontece a mágica. Você pode:
+1.  Clicar em **"Preencher com meu perfil"** para carregar seus dados salvos.
+2.  Inserir manualmente outras rendas ou deduções (saúde, educação).
+3.  Clicar em **"Realizar Cálculo Profissional"**.
+
+*(Insira aqui a imagem da Tela de Cálculo)*
+
+### 4. Resultado e Recibo
+O app apresenta um parecer detalhado.
+*   **Verde:** Valor a restituir (dinheiro de volta!).
+*   **Azul/Vermelho:** Valor a pagar.
+*   **Botão PDF:** Clique para baixar o relatório completo e conferir com sua declaração oficial.
+
+*(Insira aqui a imagem do Card de Resultado e do PDF gerado)*
+
+### 5. Histórico e Perfil
+Use a barra de navegação inferior para:
+*   **Histórico:** Ver cards coloridos de todas as simulações feitas.
+*   **Perfil:** Atualizar seus dados pessoais a qualquer momento.
+
+*(Insira aqui a imagem da Tela de Histórico e de Perfil)*
 
 ---
 
-## 🛡️ Segurança de Dados
-Este aplicativo **não envia dados para servidores externos**. Todas as informações (Nome, CPF, Renda, Gastos) são gravadas via `SharedPreferences` de forma privada, acessíveis apenas pelo próprio aplicativo no dispositivo do usuário.
+## 🛠️ Como Operar (Passo a Passo)
+
+1.  **Faça Login:** Use seu CPF e senha cadastrados.
+2.  **Verifique seu Perfil:** Vá na aba **Perfil** e confirme se sua renda bruta mensal e dependentes estão corretos.
+3.  **Simule:** Vá em **Calcular**, use o auto-preenchimento e adicione gastos extras como médicos ou escola.
+4.  **Analise:** Veja se você tem imposto a pagar ou restituir.
+5.  **Salve:** Clique em baixar PDF para guardar uma cópia do seu planejamento fiscal.
 
 ---
-*Aviso: Este app é um simulador pedagógico e não possui vínculo oficial com a Receita Federal do Brasil.*
+
+## 💻 Tecnologias Utilizadas
+
+- **Linguagem:** Java
+- **UI/UX:** Material Design Components (Google)
+- **Persistência:** SharedPreferences (Segurança local)
+- **Documentação:** iText7 (Geração de PDFs)
+- **Estrutura:** CoordinatorLayout, BottomNavigationView, NestedScrollView.
+
+---
+
+## 👥 Autores
+Este projeto foi desenvolvido com foco em acessibilidade e transparência fiscal por:
+- [Felipe Maximiano](https://github.com/MaximianoTw)
+- [João Victor](https://github.com/sorrisojoa)
+- [Lucas Lira](https://github.com/Liracodelic)
+
+---
+*Este aplicativo é um simulador para fins informativos e não substitui a declaração oficial no programa da Receita Federal.*
