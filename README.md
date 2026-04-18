@@ -71,6 +71,6 @@ Use a barra de navegação inferior para:
 - **Persistência:** SharedPreferences (Segurança local)
 - **Documentação:** iText7 (Geração de PDFs)
 - **Estrutura:** CoordinatorLayout, BottomNavigationView, NestedScrollView.
-- 
+
 ---
 *Este aplicativo é um simulador para fins informativos e não substitui a declaração oficial no programa da Receita Federal.*
