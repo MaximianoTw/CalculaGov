@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gov_blue">#00387E</color>
+    <color name="gov_blue_darker">#002147</color>
+    <color name="gov_gold">#FFCC00</color>
+    <color name="gov_gray_light">#F8F8F8</color>
+    <color name="gov_text_gray">#333333</color>
 </resources>

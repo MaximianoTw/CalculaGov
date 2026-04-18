@@ -25,6 +25,7 @@
         <activity android:name=".SignupActivity"/>
         <activity android:name=".HomeActivity"/>
         <activity android:name=".CalculoImpostoRendaActivity"/>
+        <activity android:name=".HistoricoActivity"/>
 
     </application>
 

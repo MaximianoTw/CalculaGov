@@ -1,0 +1,24 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <!-- Círculo de Fundo -->
+    <path
+        android:fillColor="@color/gov_blue"
+        android:pathData="M100,100m-100,0a100,100 0,1 1,200 0a100,100 0,1 1,-200 0" />
+    <!-- Símbolo da Balança/Justiça (Representando Impostos) -->
+    <path
+        android:fillColor="@color/gov_gold"
+        android:pathData="M100,40L100,160M60,80L140,80M60,80L70,120M140,80L130,120"
+        android:strokeWidth="8"
+        android:strokeColor="@color/gov_gold"
+        android:strokeLineCap="round"/>
+    <!-- Detalhe da Base -->
+    <path
+        android:fillColor="@color/gov_gold"
+        android:pathData="M80,160L120,160"
+        android:strokeWidth="10"
+        android:strokeColor="@color/gov_gold"
+        android:strokeLineCap="round"/>
+</vector>

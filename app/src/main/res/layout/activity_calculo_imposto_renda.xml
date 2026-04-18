@@ -1,94 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:backgroundTint="#FFFFFF"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/gov_gray_light"
     tools:context=".CalculoImpostoRendaActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="226dp"
-        app:srcCompat="@drawable/calcgovlogo"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="67dp">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/textViewRenda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Renda Mensal (R$):"
-        android:textSize="16sp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/editTextRenda"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Informe sua renda mensal"
-        android:inputType="numberDecimal"
-        tools:ignore="MissingConstraints" />
+        android:background="@color/gov_blue">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="gov.br"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="51dp">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <TextView
-        android:id="@+id/textViewDeducoes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Deduções (R$):"
-        android:textSize="16sp"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simulador Completo IRPF 2024"
+                android:textColor="@color/gov_blue"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editTextDeducoes"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Preencha com base nos seus informes de rendimentos e recibos."
+                android:textColor="@color/gov_text_gray"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/buttonAutoPreencher"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Preencher com meu perfil"
+                android:textColor="@color/gov_blue"
+                app:icon="@android:drawable/ic_menu_myplaces"
+                app:strokeColor="@color/gov_blue" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- SEÇÃO 1: IDENTIFICAÇÃO -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1. IDENTIFICAÇÃO"
+                        android:textColor="@color/gov_blue"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Seu Nome Completo"
+                        app:helperText="Como aparece no seu documento oficial (CPF)">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNome"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- SEÇÃO 2: RENDIMENTOS -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2. RENDIMENTOS (O QUE VOCÊ GANHOU)"
+                        android:textColor="@color/gov_blue"
+                        android:textStyle="bold"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Salário Mensal (Valor Bruto)"
+                        app:helperText="O valor total antes dos descontos. Veja no seu informe anual ou holerite.">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextRenda"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Outros Ganhos (Extras)"
+                        app:helperText="Soma de aluguéis recebidos, freelancers ou bônus.">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextOutrosRendimentos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- SEÇÃO 3: DEDUÇÕES -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3. DEDUÇÕES (O QUE DIMINUI O IMPOSTO)"
+                        android:textColor="@color/gov_blue"
+                        android:textStyle="bold"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Desconto do INSS"
+                        app:helperText="Veja o campo 'Previdência Oficial' no seu contracheque mensal.">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextPrevidencia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Quantos dependentes você tem?"
+                        app:helperText="Ex: Filhos, pais ou cônjuge. Cada um abate R$ 189,59 do imposto.">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextDependentes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Gastos com Saúde"
+                        app:helperText="Ex: Plano de saúde, dentista, médicos e exames (guarde os recibos).">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextSaude"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Educação ou Pensão Paga"
+                        app:helperText="Ex: Escola, Faculdade ou Pensão Alimentícia definida por juiz.">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextEduPensao"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- SEÇÃO 4: IMPOSTO PAGO -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4. IMPOSTO JÁ PAGO (IRRF)"
+                        android:textColor="@color/gov_blue"
+                        android:textStyle="bold"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Imposto já descontado (IRRF)"
+                        app:helperText="Procure por 'IRRF' no seu holerite. É o que você já pagou durante o ano.">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextIRRF"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/buttonCalcular"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="32dp"
+                        android:backgroundTint="@color/gov_blue"
+                        android:text="REALIZAR CÁLCULO PROFISSIONAL"
+                        android:textStyle="bold"
+                        app:cornerRadius="8dp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- RESULTADO DETALHADO -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardUltimoResultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/gov_blue"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:background="#F4F8FB">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PARECER DO CONTADOR DIGITAL"
+                        android:textColor="@color/gov_blue"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:id="@+id/textResumoResultado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gov_text_gray"
+                        android:lineSpacingExtra="6dp"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/buttonDownloadPDF"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="BAIXAR RECIBO COMPLETO (PDF)"
+                        android:textStyle="bold"
+                        app:icon="@android:drawable/ic_menu_save" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <Button
+                android:id="@+id/VoltarHome"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="40dp"
+                android:text="VOLTAR AO MENU"
+                android:textColor="@color/gov_text_gray" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Informe suas deduções"
-        android:inputType="numberDecimal"
-        tools:ignore="MissingConstraints" />
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:itemIconTint="@color/gov_blue"
+        app:itemTextColor="@color/gov_blue"
+        app:menu="@menu/bottom_nav_menu" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="46dp">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/buttonCalcular"
-        android:layout_width="366dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#00387B"
-        android:onClick="calcularImposto"
-        android:text="Calcular Imposto"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="85dp">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/VoltarHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#00387B"
-        android:text="voltar" />
-
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
