@@ -52,7 +52,7 @@ Após o cálculo, você verá o parecer do "Contador Digital". Se o resultado fo
 
 ## 🛠️ Como Instalar e Rodar
 
-1.  **Clone o projeto:** `git clone https://github.com/seu-usuario/CalculaGov.git`
+1.  **Clone o projeto:** `git clone https://github.com/MaximianoTw/CalculaGov.git`
 2.  **Abra no Android Studio:** Certifique-se de ter o SDK 34 (Android 14) instalado.
 3.  **Dependências:** O app utiliza `iText7` para PDFs e `Material Design 3`. O Gradle sincronizará tudo automaticamente.
 4.  **Execução:** Rode em um emulador ou dispositivo físico com Android 7.0 (API 24) ou superior.
