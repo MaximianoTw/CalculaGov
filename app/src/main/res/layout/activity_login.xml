@@ -84,8 +84,7 @@
                             app:tabIndicatorHeight="0dp"
                             app:tabRippleColor="@android:color/transparent"
                             app:tabSelectedTextColor="@color/white"
-                            app:tabTextColor="@color/gov_blue"
-                            app:tabTextAppearance="@style/CustomTabText">
+                            app:tabTextColor="@color/gov_blue">
 
                             <com.google.android.material.tabs.TabItem
                                 android:layout_width="wrap_content"
@@ -98,6 +97,33 @@
                                 android:text="Criar conta" />
                         </com.google.android.material.tabs.TabLayout>
                     </com.google.android.material.card.MaterialCardView>
+
+                    <Button
+                        android:id="@+id/buttonGovLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:backgroundTint="#9E9E9E"
+                        android:enabled="false"
+                        android:text="Entrar com gov.br (Em Breve)"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="8dp"
+                        app:iconTint="@color/white"
+                        app:iconGravity="textStart" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#DDDDDD"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingHorizontal="16dp" android:text="ou acesse com CPF" android:textSize="12sp" android:textColor="#888888"/>
+                        <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#DDDDDD"/>
+                    </LinearLayout>
 
                     <!-- Login Section -->
                     <LinearLayout
@@ -123,7 +149,7 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/edit_text_rounded_outline"
                             android:inputType="number"
-                            android:maxLength="11"
+                            android:maxLength="14"
                             android:paddingHorizontal="16dp" />
 
                         <TextView
@@ -199,7 +225,7 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/edit_text_rounded_outline"
                             android:inputType="number"
-                            android:maxLength="11"
+                            android:maxLength="14"
                             android:paddingHorizontal="16dp" />
 
                         <TextView

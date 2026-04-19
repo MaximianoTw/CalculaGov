@@ -66,4 +66,21 @@
     <string name="prazo_final">Prazo Final: 31 de Maio</string>
     <string name="meus_comprovantes">Meus Comprovantes (IA)</string>
     <string name="comprovantes_desc">Recibos lidos e guardados para auditoria.</string>
+
+    <!-- Perfil -->
+    <string name="hint_cpf">000.000.000-00</string>
+    <string name="label_cpf">CPF</string>
+    <string name="label_rg">RG</string>
+    <string name="label_empresa">Empresa / Fonte Pagadora</string>
+    <string name="label_renda_mensal">Renda Bruta Mensal</string>
+    <string name="hint_renda_mask">R$ 0.000,00</string>
+    <string name="label_num_dep">Número de Dependentes</string>
+    <string name="label_info_dep">Informações do Dependente</string>
+    <string name="label_nome_dep">Nome do Dependente</string>
+    <string name="label_cpf_dep">CPF do Dependente</string>
+    <string name="label_nascimento">Data de Nascimento</string>
+    <string name="hint_data">00/00/0000</string>
+    <string name="label_estado_civil">Estado Civil</string>
+    <string name="label_titulo_eleitor">Título de Eleitor</string>
+    <string name="btn_desbloquear_edicao">DESBLOQUEAR PARA EDITAR</string>
 </resources>

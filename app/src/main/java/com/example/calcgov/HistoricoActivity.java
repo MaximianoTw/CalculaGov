@@ -51,7 +51,11 @@ public class HistoricoActivity extends AppCompatActivity {
     private void loadHistorico() {
         Map<String, ?> allEntries = sharedPreferences.getAll();
         List<String> logs = new ArrayList<>();
+        List<String> keys = new ArrayList<>();
+        
+        // Vamos guardar a chave para poder excluir individualmente
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            keys.add(entry.getKey());
             logs.add(entry.getValue().toString());
         }
         
@@ -62,10 +66,29 @@ public class HistoricoActivity extends AppCompatActivity {
         } else {
             emptyView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
+            
+            // Inverter para mostrar os mais recentes primeiro
             Collections.reverse(logs);
-            adapter = new HistoricoAdapter(logs);
+            Collections.reverse(keys);
+            
+            adapter = new HistoricoAdapter(logs, keys, (key, position) -> {
+                showDeleteDialog(key, position);
+            });
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    private void showDeleteDialog(String key, int position) {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Excluir Registro")
+                .setMessage("Deseja remover este cálculo do seu histórico?")
+                .setPositiveButton("Excluir", (dialog, which) -> {
+                    sharedPreferences.edit().remove(key).apply();
+                    loadHistorico();
+                    Toast.makeText(this, "Registro removido", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     private void setupNavigation() {
@@ -81,15 +104,29 @@ public class HistoricoActivity extends AppCompatActivity {
                 startActivity(new Intent(this, CalculoImpostoRendaActivity.class));
                 finish();
                 return true;
+            } else if (id == R.id.nav_perfil) {
+                startActivity(new Intent(this, PerfilActivity.class));
+                finish();
+                return true;
             }
             return id == R.id.nav_historico;
         });
     }
 
+    private interface OnItemActionClickListener {
+        void onDeleteClick(String key, int position);
+    }
+
     private static class HistoricoAdapter extends RecyclerView.Adapter<HistoricoAdapter.ViewHolder> {
         private final List<String> logs;
+        private final List<String> keys;
+        private final OnItemActionClickListener actionListener;
 
-        public HistoricoAdapter(List<String> logs) { this.logs = logs; }
+        public HistoricoAdapter(List<String> logs, List<String> keys, OnItemActionClickListener listener) {
+            this.logs = logs;
+            this.keys = keys;
+            this.actionListener = listener;
+        }
 
         @NonNull
         @Override
@@ -101,7 +138,13 @@ public class HistoricoActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             String data = logs.get(position);
+            String key = keys.get(position);
             String[] parts = data.split("\\|");
+            
+            holder.btnDelete.setOnClickListener(v -> {
+                actionListener.onDeleteClick(key, position);
+            });
+
             if (parts.length >= 5) {
                 holder.tvNome.setText(parts[0]);
                 holder.tvData.setText(parts[1]);
@@ -122,6 +165,7 @@ public class HistoricoActivity extends AppCompatActivity {
 
         static class ViewHolder extends RecyclerView.ViewHolder {
             TextView tvNome, tvData, tvStatus, tvValor, tvIRRF;
+            View btnDelete;
             ViewHolder(View v) {
                 super(v);
                 tvNome = v.findViewById(R.id.textViewNomeHistorico);
@@ -129,6 +173,7 @@ public class HistoricoActivity extends AppCompatActivity {
                 tvStatus = v.findViewById(R.id.textViewStatusHistorico);
                 tvValor = v.findViewById(R.id.textViewValorHistorico);
                 tvIRRF = v.findViewById(R.id.textViewIRRFHistorico);
+                btnDelete = v.findViewById(R.id.btnDeleteHistorico);
             }
         }
     }

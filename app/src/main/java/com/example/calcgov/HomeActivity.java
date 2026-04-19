@@ -3,9 +3,12 @@ package com.example.calcgov;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +19,7 @@ import java.util.Map;
 public class HomeActivity extends AppCompatActivity {
 
     private TextView textWelcome, textLastResultValue, textLastResultStatus;
+    private TextView textDataInicio, textDataFim;
     private View cardProfileAlert, cardLastResult;
     private SharedPreferences userPrefs, historyPrefs;
 
@@ -31,12 +35,13 @@ public class HomeActivity extends AppCompatActivity {
         loadUserData();
         loadLastSimulation();
         setupNavigation();
+        fetchFiscalCalendar();
 
         findViewById(R.id.cardIR).setOnClickListener(v -> {
             startActivity(new Intent(HomeActivity.this, CalculoImpostoRendaActivity.class));
         });
 
-        findViewById(R.id.VoltarHome).setOnClickListener(v -> {
+        findViewById(R.id.btnPowerOff).setOnClickListener(v -> {
             SharedPreferences.Editor editor = userPrefs.edit();
             editor.remove("logged_cpf");
             editor.apply();
@@ -44,7 +49,11 @@ public class HomeActivity extends AppCompatActivity {
         });
         
         cardProfileAlert.setOnClickListener(v -> {
-            startActivity(new Intent(this, PerfilActivity.class));
+            checkBiometricsAndNavigate(PerfilActivity.class);
+        });
+
+        findViewById(R.id.cardDocumentos).setOnClickListener(v -> {
+            startActivity(new Intent(this, ComprovantesActivity.class));
         });
     }
 
@@ -52,8 +61,36 @@ public class HomeActivity extends AppCompatActivity {
         textWelcome = findViewById(R.id.textWelcome);
         textLastResultValue = findViewById(R.id.textLastResultValue);
         textLastResultStatus = findViewById(R.id.textLastResultStatus);
+        textDataInicio = findViewById(R.id.textDataInicio);
+        textDataFim = findViewById(R.id.textDataFim);
         cardProfileAlert = findViewById(R.id.cardProfileAlert);
         cardLastResult = findViewById(R.id.cardLastResult);
+    }
+
+    private void checkBiometricsAndNavigate(Class<?> targetActivity) {
+        BiometricHelper.showBiometricPrompt(this, new BiometricHelper.BiometricCallback() {
+            @Override
+            public void onAuthenticationSucceeded() {
+                startActivity(new Intent(HomeActivity.this, targetActivity));
+            }
+
+            @Override
+            public void onAuthenticationError(String error) {
+                Toast.makeText(HomeActivity.this, "Erro de autenticação: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fetchFiscalCalendar() {
+        ProgressBar progress = findViewById(R.id.progressCalendar);
+        progress.setVisibility(View.VISIBLE);
+        
+        // Simulação de busca dinâmica (Google/API)
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            textDataInicio.setText("Início das Declarações: 15 de Março de 2026");
+            textDataFim.setText("Prazo Final: 31 de Maio de 2026");
+            progress.setVisibility(View.GONE);
+        }, 1500); 
     }
 
     private void loadUserData() {
@@ -62,10 +99,11 @@ public class HomeActivity extends AppCompatActivity {
             String name = userPrefs.getString(loggedCpf + "_name", "Cidadão");
             textWelcome.setText("Olá, " + name.split(" ")[0] + "!");
 
-            // Check if profile is incomplete
             String renda = userPrefs.getString(loggedCpf + "_renda", "");
             if (renda.isEmpty()) {
                 cardProfileAlert.setVisibility(View.VISIBLE);
+            } else {
+                cardProfileAlert.setVisibility(View.GONE);
             }
         }
     }
@@ -97,6 +135,8 @@ public class HomeActivity extends AppCompatActivity {
                     textLastResultValue.setText(parts[3]);
                 }
             }
+        } else {
+            cardLastResult.setVisibility(View.GONE);
         }
     }
 
@@ -112,7 +152,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(this, HistoricoActivity.class));
                 return true;
             } else if (id == R.id.nav_perfil) {
-                startActivity(new Intent(this, PerfilActivity.class));
+                checkBiometricsAndNavigate(PerfilActivity.class);
                 return true;
             }
             return id == R.id.nav_home;
@@ -122,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadUserData(); // Update greeting/alerts if changed in profile
-        loadLastSimulation(); // Update last simulation if a new one was made
+        loadUserData();
+        loadLastSimulation();
     }
 }

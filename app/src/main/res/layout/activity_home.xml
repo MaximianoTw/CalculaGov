@@ -35,14 +35,29 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <TextView
-                android:id="@+id/textWelcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Área do Cidadão"
-                android:textColor="@color/gov_blue"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Olá, Cidadão!"
+                    android:textColor="@color/gov_blue"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btnPowerOff"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@android:drawable/ic_lock_power_off"
+                    app:tint="@color/gov_blue" />
+            </RelativeLayout>
 
             <View
                 android:layout_width="60dp"
@@ -159,12 +174,20 @@
                             android:background="@drawable/tab_selector_rounded"
                             android:backgroundTint="#FFCC00" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/textDataInicio"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_marginStart="8dp"
-                            android:text="Início das Declarações: 15 de Março"
+                            android:text="Início das Declarações: --"
                             android:textSize="13sp"
                             android:textColor="#555555"/>
+                        <ProgressBar
+                            android:id="@+id/progressCalendar"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:visibility="visible"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -178,10 +201,11 @@
                             android:background="@drawable/tab_selector_rounded"
                             android:backgroundTint="#FF4444" />
                         <TextView
+                            android:id="@+id/textDataFim"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="Prazo Final: 31 de Maio"
+                            android:text="Prazo Final: --"
                             android:textSize="13sp"
                             android:textColor="#555555"
                             android:textStyle="bold"/>
@@ -193,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="O que você deseja fazer?"
+                android:text="Serviços Rápidos"
                 android:textColor="@color/gov_blue"
                 android:textStyle="bold"
                 android:textSize="18sp" />
@@ -203,14 +227,13 @@
                 android:id="@+id/cardIR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
                 <LinearLayout
-                    android:id="@+id/irenda_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -247,7 +270,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Service Button 2: Pasta de Evidências (Novo) -->
+            <!-- Service Button 2: Pasta de Evidências -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDocumentos"
                 android:layout_width="match_parent"
@@ -295,20 +318,82 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <Button
-                android:id="@+id/VoltarHome"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+            <!-- Seção de Dicas do Leão -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="32dp"
-                android:text="SAIR DO APLICATIVO"
-                android:textColor="@color/gov_text_gray" />
+                android:layout_marginTop="24dp"
+                android:text="Dicas do Leão"
+                android:textColor="@color/gov_blue"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        app:cardBackgroundColor="#E3F2FD"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:text="Guarde recibos médicos por 5 anos para evitar a malha fina."
+                            android:textSize="12sp"
+                            android:textColor="#1565C0"/>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        app:cardBackgroundColor="#E8F5E9"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:text="Educação própria e de dependentes gera abatimento no imposto."
+                            android:textSize="12sp"
+                            android:textColor="#2E7D32"/>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        app:cardBackgroundColor="#FFF3E0"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:text="Contribuições para previdência privada (PGBL) podem ser deduzidas."
+                            android:textSize="12sp"
+                            android:textColor="#E65100"/>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:gravity="center"
                 android:text="🛡️ Seus dados estão protegidos e armazenados localmente."
                 android:textColor="@color/gov_text_gray"
@@ -320,7 +405,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="100dp"
                 android:gravity="center"
-                android:text="Versão 1.0.4 - CalculaGov"
+                android:text="Versão 1.0.5 - CalculaGov"
                 android:textColor="#AAAAAA"
                 android:textSize="10sp" />
 

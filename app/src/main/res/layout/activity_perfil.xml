@@ -27,6 +27,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="80dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -51,6 +52,37 @@
                 android:textColor="@color/gov_text_gray"
                 android:textSize="14sp" />
 
+            <!-- Selo de Verificado gov.br -->
+            <LinearLayout
+                android:id="@+id/layoutStatusGov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#E3F2FD"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imgSeloGov"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/checkbox_on_background"
+                    android:contentDescription="Selo gov.br"
+                    app:tint="@color/gov_blue" />
+
+                <TextView
+                    android:id="@+id/txtStatusGov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Dados básicos do perfil"
+                    android:textColor="@color/gov_blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,11 +91,13 @@
                 app:cardElevation="2dp">
 
                 <LinearLayout
+                    android:id="@+id/containerCamposPerfil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="20dp">
 
+                    <!-- Nome Completo -->
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
@@ -76,31 +110,196 @@
                             android:inputType="textPersonName" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <!-- CPF e RG -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Renda Bruta Mensal">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editPerfilRenda"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:orientation="horizontal">
 
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:layout_marginEnd="8dp"
+                            android:hint="@string/label_cpf"
+                            app:placeholderText="@string/hint_cpf">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editPerfilCPF"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="@string/label_rg">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editPerfilRG"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Nascimento e Estado Civil -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:hint="@string/label_nascimento"
+                            app:placeholderText="@string/hint_data">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editPerfilNascimento"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="date" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="@string/label_estado_civil">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editPerfilEstadoCivil"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Título de Eleitor -->
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Número de Dependentes">
+                        android:hint="@string/label_titulo_eleitor">
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editPerfilDep"
+                            android:id="@+id/editPerfilTitulo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Empresa -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="@string/label_empresa">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editPerfilEmpresa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Renda e Dependentes -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:hint="@string/label_renda_mensal"
+                            app:placeholderText="@string/hint_renda_mask">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editPerfilRenda"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="@string/label_num_dep">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editPerfilDep"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Seção de Dependentes (Dinâmica) -->
+                    <LinearLayout
+                        android:id="@+id/containerDependentes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_info_dep"
+                            android:textColor="@color/gov_blue"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/label_nome_dep">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editNomeDepInfo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/label_cpf_dep"
+                            app:placeholderText="@string/hint_cpf">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editCPFDepInfo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/buttonDesbloquear"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/btn_desbloquear_edicao"
+                        android:textColor="@color/gov_blue"
+                        android:visibility="gone"
+                        app:icon="@android:drawable/ic_lock_idle_lock"
+                        app:strokeColor="@color/gov_blue" />
 
                     <Button
                         android:id="@+id/buttonSalvarPerfil"

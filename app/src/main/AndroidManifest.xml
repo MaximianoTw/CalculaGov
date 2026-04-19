@@ -2,10 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Câmera -->
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Armazenamento para Android 12 ou inferior -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" tools:ignore="ScopedStorage" />
+
+    <!-- Permissões para Android 13+ (Se necessário ler fotos da galeria) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <queries>
+        <package android:name="br.gov.meugovbr" />
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -26,12 +36,21 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="calcgov" android:host="confirmacao-login" />
+            </intent-filter>
+        </activity>
         <activity android:name=".SignupActivity"/>
         <activity android:name=".HomeActivity"/>
         <activity android:name=".CalculoImpostoRendaActivity"/>
         <activity android:name=".HistoricoActivity"/>
         <activity android:name=".PerfilActivity"/>
+        <activity android:name=".ComprovantesActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

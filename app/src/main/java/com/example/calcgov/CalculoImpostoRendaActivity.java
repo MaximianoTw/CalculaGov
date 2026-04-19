@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -51,8 +53,8 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
     private TextInputEditText editTextRendaMensal, editTextPrevidenciaMensal, editTextDepMensal,
             editTextRendaAnual, editTextPrevidenciaAnual, editTextDepAnual, editTextSaudeAnual, 
             editTextEduAnual, editTextPensaoAnual, editTextIRRFAnual;
-    private TextView textResumoResultado;
-    private View cardUltimoResultado, layoutMensal, layoutAnual;
+    private TextView textResumoResultado, textResultadoSimplificado, textResultadoCompleto, textDicaEconomia;
+    private View cardUltimoResultado, layoutMensal, layoutAnual, cardComparativo;
     private Button buttonCalcular, buttonDownloadPDF, buttonVoltar, btnAutoPreencherMensal;
     private TabLayout tabLayoutPeriodo;
     private SharedPreferences sharedPreferences, userPrefs;
@@ -75,6 +77,7 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         initViews();
         setupNavigation();
         setupBackConfirmation();
+        setupMasks();
         
         buttonCalcular.setOnClickListener(v -> {
             boolean isAnual = tabLayoutPeriodo.getSelectedTabPosition() == 1;
@@ -92,6 +95,46 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         btnAutoPreencherMensal.setOnClickListener(v -> autoPreencher());
         
         setupEvidenciaButtons();
+    }
+
+    private void setupMasks() {
+        applyMoneyMask(editTextRendaMensal);
+        applyMoneyMask(editTextPrevidenciaMensal);
+        applyMoneyMask(editTextRendaAnual);
+        applyMoneyMask(editTextPrevidenciaAnual);
+        applyMoneyMask(editTextSaudeAnual);
+        applyMoneyMask(editTextEduAnual);
+        applyMoneyMask(editTextPensaoAnual);
+        applyMoneyMask(editTextIRRFAnual);
+    }
+
+    private void applyMoneyMask(TextInputEditText et) {
+        et.addTextChangedListener(new TextWatcher() {
+            private String current = "";
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().equals(current)) {
+                    et.removeTextChangedListener(this);
+
+                    String cleanString = s.toString().replaceAll("[R$,.\\s\u00A0]", "");
+                    if (cleanString.isEmpty()) cleanString = "0";
+
+                    try {
+                        double parsed = Double.parseDouble(cleanString);
+                        String formatted = NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format((parsed / 100));
+                        current = formatted;
+                        et.setText(formatted);
+                        et.setSelection(formatted.length());
+                    } catch (Exception e) {
+                        // ignore
+                    }
+
+                    et.addTextChangedListener(this);
+                }
+            }
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void afterTextChanged(Editable s) {}
+        });
     }
 
     private void setupLaunchers() {
@@ -292,10 +335,32 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         
         textResumoResultado = findViewById(R.id.textResumoResultado);
         cardUltimoResultado = findViewById(R.id.cardUltimoResultado);
+        cardComparativo = findViewById(R.id.cardComparativo);
+        textResultadoSimplificado = findViewById(R.id.textResultadoSimplificado);
+        textResultadoCompleto = findViewById(R.id.textResultadoCompleto);
+        textDicaEconomia = findViewById(R.id.textDicaEconomia);
         
         buttonCalcular = findViewById(R.id.buttonCalcular);
         buttonDownloadPDF = findViewById(R.id.buttonDownloadPDF);
+        Button buttonSalvarCalculo = findViewById(R.id.buttonSalvarCalculo);
         buttonVoltar = findViewById(R.id.VoltarHome);
+
+        buttonSalvarCalculo.setOnClickListener(v -> {
+            String nome = userPrefs.getString(userPrefs.getString("logged_cpf", "") + "_name", "Cidadão");
+            String resumo = textResumoResultado.getText().toString();
+            if (!resumo.isEmpty()) {
+                double finalResult = 0;
+                if (resumo.contains("Restituição")) {
+                    finalResult = -1;
+                }
+                salvarNoHistorico(nome, 0, finalResult);
+                Toast.makeText(this, "Cálculo salvo no histórico!", Toast.LENGTH_SHORT).show();
+                buttonSalvarCalculo.setEnabled(false);
+                buttonSalvarCalculo.setAlpha(0.5f);
+            }
+        });
+
+        buttonDownloadPDF.setOnClickListener(v -> gerarRelatorioPDF());
     }
 
     private void autoPreencher() {
@@ -305,6 +370,7 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
             return;
         }
 
+        String name = userPrefs.getString(loggedCpf + "_name", "");
         String renda = userPrefs.getString(loggedCpf + "_renda", "");
         String dependentes = userPrefs.getString(loggedCpf + "_dep", "");
 
@@ -313,10 +379,22 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
             return;
         }
 
+        // Preenche campos mensais
         editTextRendaMensal.setText(renda);
         editTextDepMensal.setText(dependentes);
+
+        // Preenche campos anuais (Simulando inteligência: mensal x 12)
+        try {
+            double rendaMensalVal = parseDouble(renda);
+            editTextRendaAnual.setText(NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(rendaMensalVal * 12));
+            editTextDepAnual.setText(dependentes);
+            
+            double prevEstimada = rendaMensalVal * 0.11 * 12; // 11% médio
+            editTextPrevidenciaAnual.setText(NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(prevEstimada));
+            
+        } catch (Exception ignored) {}
         
-        Toast.makeText(this, "Dados do perfil carregados!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Perfil gov.br carregado com sucesso!", Toast.LENGTH_SHORT).show();
     }
 
     private void processarCalculo(boolean isAnual) {
@@ -366,12 +444,52 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         // 4. RESULTADO FINAL
         double resultadoFinal = isAnual ? (impostoDevido - irrfJaPago) : impostoDevido;
 
+        if (isAnual) {
+            calcularComparativo(totalRendimentos, totalDeducoes, irrfJaPago);
+        } else {
+            cardComparativo.setVisibility(View.GONE);
+        }
+
         exibirResultado(nomeContribuinte, totalRendimentos, totalDeducoes, baseCalculo, impostoDevido, irrfJaPago, resultadoFinal, isAnual);
+    }
+
+    private void calcularComparativo(double totalRendimentos, double deducoesLegais, double irrfJaPago) {
+        // Modelo Simplificado: Desconto padrão de 20% limitado a R$ 16.754,34
+        double descontoSimplificado = Math.min(totalRendimentos * 0.20, 16754.34);
+        double baseSimplificada = totalRendimentos - descontoSimplificado;
+        double impostoSimplificado = calcularIRPF(baseSimplificada, true);
+        double resultadoSimplificado = impostoSimplificado - irrfJaPago;
+
+        // Modelo Completo (já calculado anteriormente como deducoesLegais)
+        double impostoCompleto = calcularIRPF(totalRendimentos - deducoesLegais, true);
+        double resultadoCompleto = impostoCompleto - irrfJaPago;
+
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        textResultadoSimplificado.setText(nf.format(resultadoSimplificado));
+        textResultadoCompleto.setText(nf.format(resultadoCompleto));
+
+        cardComparativo.setVisibility(View.VISIBLE);
+
+        if (resultadoCompleto < resultadoSimplificado) {
+            double economia = resultadoSimplificado - resultadoCompleto;
+            textDicaEconomia.setText("O Modelo Completo é melhor! Você economiza " + nf.format(economia));
+            textDicaEconomia.setBackgroundColor(0xFFE7F3FF); // Azul suave
+        } else {
+            double economia = resultadoCompleto - resultadoSimplificado;
+            textDicaEconomia.setText("O Modelo Simplificado é melhor! Você economiza " + nf.format(economia));
+            textDicaEconomia.setBackgroundColor(0xFFE8F5E9); // Verde suave
+        }
     }
 
     private double parseDouble(String val) {
         if (val == null || val.isEmpty()) return 0;
-        try { return Double.parseDouble(val.replace(",", ".")); } catch (Exception e) { return 0; }
+        try {
+            // Remove R$, pontos de milhar e substitui vírgula decimal por ponto
+            String clean = val.replaceAll("[R$\\.\\s\u00A0]", "").replace(",", ".");
+            return Double.parseDouble(clean);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     private double calcularIRPF(double base, boolean isAnual) {
@@ -474,9 +592,30 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
             document.add(new Paragraph("Atenção: Use este relatório para conferir sua declaração oficial na Receita Federal."));
 
             document.close();
-            Toast.makeText(this, "Relatório com evidências salvo em Documentos!", Toast.LENGTH_LONG).show();
+            
+            // Oferecer compartilhamento ou abertura do arquivo
+            oferecerAcoesArquivo(filePath);
+            
         } catch (Exception e) {
             Toast.makeText(this, "Erro ao gerar PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void oferecerAcoesArquivo(File file) {
+        Uri uri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", file);
+        
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("application/pdf");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        
+        Intent chooser = Intent.createChooser(intent, "Compartilhar ou Salvar Relatório");
+        
+        // Adicionar opção de abrir o arquivo diretamente
+        Intent openIntent = new Intent(Intent.ACTION_VIEW);
+        openIntent.setDataAndType(uri, "application/pdf");
+        openIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        
+        startActivity(chooser);
     }
 }

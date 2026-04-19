@@ -1,99 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gov_blue"
+    android:background="@color/gov_gray_light"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <!-- Fundo com grafismo sutil -->
-    <View
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gov_blue"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="64dp">
+
+            <TextView
+                android:id="@+id/txtAppTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_title"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_subtitle"
+                android:textColor="@color/gov_gold"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.05"
-        android:background="@drawable/edit_text_border"
-        android:scaleX="3"
-        android:scaleY="3"
-        android:rotation="25" />
+        android:layout_marginTop="-40dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/main_title"
-            android:textColor="@color/white"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:letterSpacing="-0.02" />
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_subtitle"
-            android:textColor="@color/gov_gold"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:letterSpacing="0.1" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardWelcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/txtApoio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0.4">
 
-        <View
-            android:layout_width="60dp"
-            android:layout_height="4dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/gov_gold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:gravity="center"
-            android:text="@string/main_description"
-            android:textColor="#F0F0F0"
-            android:textSize="16sp"
-            android:lineSpacingExtra="6dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bem-vindo ao seu Planejador Fiscal"
+                        android:textColor="@color/gov_blue"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/main_description"
+                        android:textColor="@color/gov_text_gray"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginButton"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="56dp"
-        android:backgroundTint="@color/gov_gold"
-        android:onClick="navigateToLogin"
-        android:text="@string/btn_comecar"
-        android:textColor="@color/gov_blue"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:cornerRadius="12dp"
-        app:icon="@android:drawable/ic_media_play"
-        app:iconGravity="textEnd"
-        app:layout_constraintBottom_toBottomOf="parent" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="24dp"
+                        android:background="#EEEEEE" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="@string/apoio_receita"
-        android:textColor="#BDBDBD"
-        android:textSize="12sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/loginButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="24dp"
+                        android:backgroundTint="@color/gov_blue"
+                        android:onClick="navigateToLogin"
+                        android:text="@string/btn_comecar"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="8dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/txtApoio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/apoio_receita"
+                android:textColor="@color/gov_text_gray"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

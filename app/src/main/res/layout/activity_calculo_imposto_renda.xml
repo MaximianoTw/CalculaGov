@@ -446,6 +446,97 @@
                         android:textSize="16sp"
                         app:cornerRadius="8dp" />
 
+                    <!-- NOVO: CARD DE COMPARAÇÃO DE MODELOS -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardComparativo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:visibility="gone"
+                        app:cardBackgroundColor="#F8F9FA"
+                        app:cardCornerRadius="12dp"
+                        app:strokeColor="#DEE2E6"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="MELHOR OPÇÃO PARA VOCÊ"
+                                android:textColor="@color/gov_blue"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Simplificada"
+                                        android:textSize="12sp" />
+                                    <TextView
+                                        android:id="@+id/textResultadoSimplificado"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="R$ 0,00"
+                                        android:textColor="#000000"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginHorizontal="16dp"
+                                    android:background="#DEE2E6" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Completa"
+                                        android:textSize="12sp" />
+                                    <TextView
+                                        android:id="@+id/textResultadoCompleto"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="R$ 0,00"
+                                        android:textColor="#000000"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textDicaEconomia"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:background="#E7F3FF"
+                                android:padding="8dp"
+                                android:text="Analisando as melhores opções para sua economia..."
+                                android:textColor="#0056B3"
+                                android:textSize="12sp"
+                                android:textStyle="italic" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -500,6 +591,23 @@
                         app:icon="@android:drawable/ic_menu_save"
                         app:iconPadding="12dp"
                         app:iconTint="@color/gov_blue" />
+
+                    <Button
+                        android:id="@+id/buttonSalvarCalculo"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="#FFF9C4"
+                        android:text="SALVAR CÁLCULO NO HISTÓRICO"
+                        android:textAllCaps="false"
+                        android:textColor="#856404"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="8dp"
+                        app:icon="@android:drawable/ic_menu_agenda"
+                        app:iconPadding="12dp"
+                        app:iconTint="#856404" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
