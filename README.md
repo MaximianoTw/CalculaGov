@@ -1,76 +1,64 @@
-# 🇧🇷 CalculaGov - Seu Contador Digital IRPF 2026
+#🇧🇷 CalculaGov - Seu Contador Digital IRPF 2026
 
-O **CalculaGov** é um aplicativo Android moderno e seguro, desenvolvido para simplificar a vida do cidadão brasileiro na hora de lidar com o Imposto de Renda. Com um design inspirado no portal **gov.br**, o app oferece uma experiência profissional, intuitiva e totalmente privada.
-
----
-
-## 🚀 Principais Funcionalidades
-
-- **Identidade Visual Oficial:** Interface limpa seguindo o padrão de design do Governo Federal (azul `#1351b4`, ouro `#FFCC00`).
-- **Simulador Completo IRPF 2026:** Cálculos precisos baseados na tabela vigente, considerando rendas, dependentes, previdência e despesas dedutíveis.
-- **Perfil Inteligente:** Cadastre seus dados uma única vez e preencha simulações com apenas um clique.
-- **Histórico de Cálculos:** Mantenha um registro de todas as suas simulações passadas para comparação.
-- **Geração de PDF:** Exporte o resumo detalhado do seu cálculo para um recibo digital profissional.
-- **Privacidade Total:** Seus dados sensíveis (CPF, Renda) são armazenados **apenas localmente** no seu dispositivo.
+O **CalculaGov** evoluiu de um simples simulador para um **Gestor de Riscos e Planejador Fiscal** completo. Com identidade visual oficial do padrão **gov.br**, o app agora integra inteligência artificial para leitura de recibos e conexão direta com o ecossistema do Governo Federal.
 
 ---
 
-## 📸 Guia de Uso (Screenshots)
+## 🚀 Novidades da Versão "Contador Digital"
 
-### 1. Acesso e Segurança
-Ao abrir o app, você encontrará uma Landing Page profissional. No primeiro acesso, crie sua conta na aba **"Criar Conta"**.
-*   **Dica:** Preencha sua renda e dependentes já no cadastro para ativar o preenchimento automático.
+### 🔐 Integração com App gov.br (Deep Linking)
+- **Login Seguro:** Agora você pode entrar usando sua conta oficial **gov.br**.
+- **Segurança Máxima:** O app detecta se você tem o aplicativo oficial instalado. Se sim, abre para autenticação biométrica; se não, te guia para a Play Store.
+- **Privacidade:** Suas senhas nunca tocam nossos servidores, tudo é feito no ambiente oficial do governo.
 
-*(Insira aqui a imagem da tela de Login/Cadastro)*
+### 🤖 IA Auditora de Recibos (OCR)
+- **Câmera Inteligente:** Use a câmera para ler recibos de médicos, dentistas ou escolas.
+- **Extração Automática:** A IA identifica valores e preenche os campos de dedução para você, evitando erros de digitação.
+- **Pasta de Evidências:** Anexe fotos dos comprovantes diretamente no seu relatório PDF para se proteger da Malha Fina.
 
-### 2. Home - Área do Cidadão
-A tela inicial te recebe pelo nome e mostra um resumo do seu último cálculo realizado. Se seu perfil estiver incompleto, um alerta amarelo te lembrará de atualizá-lo.
-*   **Botão Central:** Clique em "Simulador de Imposto de Renda" para começar.
+### 📉 Comparativo de Modelos (Simplificado vs. Completo)
+- **Consultoria Automática:** O app calcula simultaneamente os dois modelos de tributação da Receita Federal.
+- **Dica de Economia:** Receba um alerta visual (Verde/Azul) indicando qual modelo te faz pagar menos imposto ou receber mais restituição.
 
-*(Insira aqui a imagem da Home personalizada)*
-
-### 3. Simulador Inteligente
-Aqui acontece a mágica. Você pode:
-1.  Clicar em **"Preencher com meu perfil"** para carregar seus dados salvos.
-2.  Inserir manualmente outras rendas ou deduções (saúde, educação).
-3.  Clicar em **"Realizar Cálculo Profissional"**.
-
-*(Insira aqui a imagem da Tela de Cálculo)*
-
-### 4. Resultado e Recibo
-O app apresenta um parecer detalhado.
-*   **Verde:** Valor a restituir (dinheiro de volta!).
-*   **Azul/Vermelho:** Valor a pagar.
-*   **Botão PDF:** Clique para baixar o relatório completo e conferir com sua declaração oficial.
-
-*(Insira aqui a imagem do Card de Resultado e do PDF gerado)*
-
-### 5. Histórico e Perfil
-Use a barra de navegação inferior para:
-*   **Histórico:** Ver cards coloridos de todas as simulações feitas.
-*   **Perfil:** Atualizar seus dados pessoais a qualquer momento.
-
-*(Insira aqui a imagem da Tela de Histórico e de Perfil)*
+### 📅 Painel do Cidadão (Home)
+- **Calendário Fiscal:** Fique por dentro dos prazos de entrega (15 de Março a 31 de Maio).
+- **Preenchimento Automático:** Importe sua renda e dependentes direto do seu perfil verificado.
 
 ---
 
-## 🛠️ Como Operar (Passo a Passo)
+## 📸 Funcionalidades em Destaque
 
-1.  **Faça Login:** Use seu CPF e senha cadastrados.
-2.  **Verifique seu Perfil:** Vá na aba **Perfil** e confirme se sua renda bruta mensal e dependentes estão corretos.
-3.  **Simule:** Vá em **Calcular**, use o auto-preenchimento e adicione gastos extras como médicos ou escola.
-4.  **Analise:** Veja se você tem imposto a pagar ou restituir.
-5.  **Salve:** Clique em baixar PDF para guardar uma cópia do seu planejamento fiscal.
+### 1. Login e Autenticação Única
+Acesse com a confiança do selo prata/ouro do gov.br ou crie uma conta local criptografada.
+*(Sugestão: Adicione aqui o print da nova tela de login com o botão azul gov.br)*
+
+### 2. Simulador com IA e Comparativo
+Preencha os campos usando a câmera e veja em tempo real qual modelo é mais vantajoso para o seu bolso.
+*(Sugestão: Adicione aqui o print do novo Card de Comparação e dos botões de câmera nos campos)*
+
+### 3. Relatório de Auditoria (PDF)
+Gere um PDF profissional que inclui não apenas os cálculos, mas também as **fotos dos recibos** anexados, servindo como sua pasta de evidências digital.
+*(Sugestão: Adicione aqui o print do PDF gerado com as imagens dos recibos)*
+
+---
+
+## 🛠️ Tecnologias e APIs
+
+- **Integração Governamental:** Deep Linking com o pacote `br.gov.meugovbr`.
+- **Inteligência Artificial:** Google ML Kit (Text Recognition) para leitura de documentos.
+- **Motor de Cálculo:** Lógica tributária atualizada para a tabela progressiva de 2026.
+- **Relatórios:** iText7 para geração de documentos com evidências fotográficas.
+- **UI/UX:** Material Design 3 com cores oficiais `#00387E` (Azul) e `#FFCC00` (Ouro).
 
 ---
 
-## 💻 Tecnologias Utilizadas
+## 💻 Como Operar
 
-- **Linguagem:** Java
-- **UI/UX:** Material Design Components (Google)
-- **Persistência:** SharedPreferences (Segurança local)
-- **Documentação:** iText7 (Geração de PDFs)
-- **Estrutura:** CoordinatorLayout, BottomNavigationView, NestedScrollView.
+1.  **Acesse com gov.br:** Clique no botão azul para uma experiência integrada.
+2.  **Importe seus Dados:** Use o "Auto-preencher" para carregar sua renda oficial.
+3.  **Escaneie Recibos:** Use o ícone da câmera nos campos de Saúde e Educação.
+4.  **Compare e Escolha:** Veja a "Dica de Economia" para escolher o melhor modelo de declaração.
+5.  **Baixe seu Dossiê:** Gere o PDF com todas as evidências para sua segurança fiscal.
 
 ---
-*Este aplicativo é um simulador para fins informativos e não substitui a declaração oficial no programa da Receita Federal.*
+*Aviso: O CalculaGov é uma ferramenta de apoio e simulação. Sempre confira os dados finais no programa oficial da Receita Federal do Brasil.*
