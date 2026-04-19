@@ -125,11 +125,75 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Calendário Fiscal -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Serviços em Destaque"
+                android:text="Calendário IRPF 2026"
+                android:textColor="@color/gov_blue"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#DDDDDD"
+                app:strokeWidth="1dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/tab_selector_rounded"
+                            android:backgroundTint="#FFCC00" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Início das Declarações: 15 de Março"
+                            android:textSize="13sp"
+                            android:textColor="#555555"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/tab_selector_rounded"
+                            android:backgroundTint="#FF4444" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Prazo Final: 31 de Maio"
+                            android:textSize="13sp"
+                            android:textColor="#555555"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="O que você deseja fazer?"
                 android:textColor="@color/gov_blue"
                 android:textStyle="bold"
                 android:textSize="18sp" />
@@ -169,7 +233,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Simulador de Imposto de Renda"
+                            android:text="Imposto de Renda (Simulador)"
                             android:textColor="@color/gov_blue"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -177,18 +241,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Calcule e gere seu recibo mensal"
+                            android:text="Descubra se você deve pagar ou receber dinheiro."
                             android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Service Button 2: IPVA (Exemplo de botão real no padrão) -->
+            <!-- Service Button 2: Pasta de Evidências (Novo) -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDocumentos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:alpha="0.6"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
@@ -202,8 +268,8 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@android:drawable/ic_dialog_map"
-                        app:tint="@color/gov_text_gray" />
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="@color/gov_blue" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -215,15 +281,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Consulta de IPVA"
-                            android:textColor="@color/gov_text_gray"
+                            android:text="Meus Comprovantes (IA)"
+                            android:textColor="@color/gov_blue"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Serviço indisponível no momento"
+                            android:text="Recibos lidos e guardados para auditoria."
                             android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -236,7 +302,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp"
-                android:text="SAIR DA CONTA"
+                android:text="SAIR DO APLICATIVO"
                 android:textColor="@color/gov_text_gray" />
 
             <TextView

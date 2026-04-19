@@ -1,3 +1,69 @@
 <resources>
-    <string name="app_name">CalcGov</string>
+    <string name="app_name">CalculaGov</string>
+    <string name="gov_br">gov.br</string>
+    <string name="simulador_ir_title">Simulador de Imposto de Renda</string>
+    <string name="simulador_subtitle">Responda às perguntas abaixo para saber se você tem imposto a pagar ou dinheiro a receber.</string>
+    <string name="simulacao_mensal">Simulação Mensal</string>
+    <string name="simulacao_anual">Simulação Anual</string>
+    <string name="preencher_perfil">Preencher com meu perfil</string>
+
+    <!-- Campos Mensais -->
+    <string name="pergunta_renda_mensal">1. Quanto você ganha por mês? (Salário Bruto)</string>
+    <string name="legenda_renda_mensal">Coloque o valor total que aparece no seu contrato, sem os descontos.</string>
+    <string name="hint_renda_mensal">Ex: 3500,00</string>
+
+    <string name="pergunta_inss_mensal">2. Quanto é descontado de INSS?</string>
+    <string name="legenda_inss_mensal">Olhe no seu holerite o valor que vem escrito \'INSS\'.</string>
+    <string name="hint_inss_mensal">Valor do desconto</string>
+
+    <string name="pergunta_dep_mensal">3. Quantos filhos ou dependentes você tem?</string>
+    <string name="legenda_dep_mensal">Pessoas que dependem do seu dinheiro para viver.</string>
+    <string name="hint_dep_mensal">Quantidade</string>
+
+    <string name="btn_calcular_mensal">Calcular Imposto Mensal</string>
+
+    <!-- Campos Anuais -->
+    <string name="pergunta_renda_anual">1. Quanto você ganhou no ano inteiro?</string>
+    <string name="legenda_renda_anual">Soma de todos os seus salários de Janeiro a Dezembro.</string>
+    <string name="hint_renda_anual">Soma dos salários</string>
+
+    <string name="pergunta_inss_anual">2. Quanto pagou de INSS no ano?</string>
+    <string name="legenda_inss_anual">Soma dos descontos de INSS de todos os meses.</string>
+    <string name="hint_inss_anual">Total de INSS</string>
+
+    <string name="pergunta_saude_anual">4. Quanto pagou de convênio ou médicos?</string>
+    <string name="legenda_saude_anual">Gastos com saúde (Médicos, Dentistas, Hospitais).</string>
+    <string name="hint_saude_anual">Gastos com saúde</string>
+
+    <string name="pergunta_edu_anual">5. Gastos com Escola ou Faculdade</string>
+    <string name="legenda_edu_anual">Educação sua ou de seus filhos.</string>
+    <string name="hint_edu_anual">Total com educação</string>
+
+    <string name="pergunta_pensao_anual">6. Pagou Pensão Alimentícia?</string>
+    <string name="legenda_pensao_anual">Valor total pago de pensão no ano.</string>
+    <string name="hint_pensao_anual">Total de pensão</string>
+
+    <string name="pergunta_irrf_anual">7. Imposto que já foi descontado (IRRF)</string>
+    <string name="legenda_irrf_anual">Soma de todo o imposto que já saiu do seu salário no ano.</string>
+    <string name="hint_irrf_anual">Soma do IRRF</string>
+
+    <string name="btn_calcular_anual">Calcular Imposto (IA Auditora)</string>
+
+    <string name="parecer_titulo">PARECER DO CONTADOR DIGITAL</string>
+    <string name="btn_pdf">Baixar Recibo (PDF)</string>
+    <string name="btn_voltar_menu">VOLTAR AO MENU</string>
+
+    <!-- MainActivity -->
+    <string name="main_title">CalculaGov</string>
+    <string name="main_subtitle">Seu Contador Digital</string>
+    <string name="main_description">O jeito mais fácil de calcular seu Imposto de Renda. Use sua câmera para ler recibos e veja o resultado na hora.</string>
+    <string name="btn_comecar">COMEÇAR AGORA</string>
+    <string name="apoio_receita">Apoio: Receita Federal do Brasil</string>
+
+    <!-- Home -->
+    <string name="calendario_titulo">Calendário IRPF 2026</string>
+    <string name="inicio_declaracoes">Início das Declarações: 15 de Março</string>
+    <string name="prazo_final">Prazo Final: 31 de Maio</string>
+    <string name="meus_comprovantes">Meus Comprovantes (IA)</string>
+    <string name="comprovantes_desc">Recibos lidos e guardados para auditoria.</string>
 </resources>

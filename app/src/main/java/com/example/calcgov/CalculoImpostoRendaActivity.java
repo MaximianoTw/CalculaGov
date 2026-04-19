@@ -44,14 +44,17 @@ import java.io.FileOutputStream;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import com.google.android.material.tabs.TabLayout;
+
 public class CalculoImpostoRendaActivity extends AppCompatActivity {
 
-    private TextInputEditText editTextNome, editTextRenda, editTextOutrosRendimentos, 
-            editTextPrevidencia, editTextDependentes, editTextSaude, editTextEduPensao, editTextIRRF;
+    private TextInputEditText editTextRendaMensal, editTextPrevidenciaMensal, editTextDepMensal,
+            editTextRendaAnual, editTextPrevidenciaAnual, editTextDepAnual, editTextSaudeAnual, 
+            editTextEduAnual, editTextPensaoAnual, editTextIRRFAnual;
     private TextView textResumoResultado;
-    private View cardUltimoResultado;
-    private Button buttonCalcular, buttonDownloadPDF, buttonVoltar, buttonAutoPreencher;
-    private MaterialButtonToggleGroup toggleGroupPeriodo;
+    private View cardUltimoResultado, layoutMensal, layoutAnual;
+    private Button buttonCalcular, buttonDownloadPDF, buttonVoltar, btnAutoPreencherMensal;
+    private TabLayout tabLayoutPeriodo;
     private SharedPreferences sharedPreferences, userPrefs;
     
     private Uri photoUri;
@@ -73,10 +76,20 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         setupNavigation();
         setupBackConfirmation();
         
-        buttonCalcular.setOnClickListener(v -> processarCalculo());
+        buttonCalcular.setOnClickListener(v -> {
+            boolean isAnual = tabLayoutPeriodo.getSelectedTabPosition() == 1;
+            processarCalculo(isAnual);
+        });
+        
         buttonDownloadPDF.setOnClickListener(v -> gerarRelatorioPDF());
-        buttonVoltar.setOnClickListener(v -> confirmarSaida());
-        buttonAutoPreencher.setOnClickListener(v -> autoPreencher());
+        buttonVoltar.setOnClickListener(v -> {
+            if (temDadosPreenchidos()) {
+                confirmarSaida(() -> finish());
+            } else {
+                finish();
+            }
+        });
+        btnAutoPreencherMensal.setOnClickListener(v -> autoPreencher());
         
         setupEvidenciaButtons();
     }
@@ -96,10 +109,8 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
     }
 
     private void setupEvidenciaButtons() {
-        findViewById(R.id.btnEvidenciaRenda).setOnClickListener(v -> mostrarDialogoOrigem(editTextRenda));
-        findViewById(R.id.btnEvidenciaOutros).setOnClickListener(v -> mostrarDialogoOrigem(editTextOutrosRendimentos));
-        findViewById(R.id.btnEvidenciaSaude).setOnClickListener(v -> mostrarDialogoOrigem(editTextSaude));
-        findViewById(R.id.btnEvidenciaEdu).setOnClickListener(v -> mostrarDialogoOrigem(editTextEduPensao));
+        findViewById(R.id.btnEvidenciaRendaMensal).setOnClickListener(v -> mostrarDialogoOrigem(editTextRendaMensal));
+        findViewById(R.id.btnEvidenciaSaudeAnual).setOnClickListener(v -> mostrarDialogoOrigem(editTextSaudeAnual));
     }
 
     private void mostrarDialogoOrigem(TextInputEditText target) {
@@ -179,17 +190,39 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                confirmarSaida();
+                if (temDadosPreenchidos()) {
+                    confirmarSaida(() -> finish());
+                } else {
+                    finish();
+                }
             }
         });
     }
 
-    private void confirmarSaida() {
+    private boolean temDadosPreenchidos() {
+        // Verifica campos mensais
+        if (!editTextRendaMensal.getText().toString().isEmpty()) return true;
+        if (!editTextPrevidenciaMensal.getText().toString().isEmpty()) return true;
+        if (!editTextDepMensal.getText().toString().isEmpty()) return true;
+
+        // Verifica campos anuais
+        if (!editTextRendaAnual.getText().toString().isEmpty()) return true;
+        if (!editTextPrevidenciaAnual.getText().toString().isEmpty()) return true;
+        if (!editTextDepAnual.getText().toString().isEmpty()) return true;
+        if (!editTextSaudeAnual.getText().toString().isEmpty()) return true;
+        if (!editTextEduAnual.getText().toString().isEmpty()) return true;
+        if (!editTextPensaoAnual.getText().toString().isEmpty()) return true;
+        if (!editTextIRRFAnual.getText().toString().isEmpty()) return true;
+
+        return false;
+    }
+
+    private void confirmarSaida(Runnable onConfirm) {
         new AlertDialog.Builder(this)
                 .setTitle("Sair do preenchimento?")
-                .setMessage("Se você sair agora, os dados digitados não serão salvos. Deseja continuar?")
-                .setPositiveButton("Sair", (dialog, which) -> finish())
-                .setNegativeButton("Continuar", null)
+                .setMessage("Se você mudar de página agora, os dados não serão salvos.")
+                .setPositiveButton("SAIR", (dialog, which) -> onConfirm.run())
+                .setNegativeButton("FICAR", null)
                 .show();
     }
 
@@ -198,39 +231,64 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         nav.setSelectedItemId(R.id.nav_calculo);
         nav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                confirmarSaidaESairPara(HomeActivity.class);
-                return true;
-            } else if (id == R.id.nav_historico) {
-                confirmarSaidaESairPara(HistoricoActivity.class);
+            Class<?> targetClass = null;
+            if (id == R.id.nav_home) targetClass = HomeActivity.class;
+            else if (id == R.id.nav_historico) targetClass = HistoricoActivity.class;
+            else if (id == R.id.nav_perfil) targetClass = PerfilActivity.class;
+
+            if (targetClass != null) {
+                if (temDadosPreenchidos()) {
+                    Class<?> finalTargetClass = targetClass;
+                    confirmarSaida(() -> {
+                        startActivity(new Intent(this, finalTargetClass));
+                        finish();
+                    });
+                } else {
+                    startActivity(new Intent(this, targetClass));
+                    finish();
+                }
                 return true;
             }
             return id == R.id.nav_calculo;
         });
     }
 
-    private void confirmarSaidaESairPara(Class<?> activityClass) {
-        new AlertDialog.Builder(this)
-                .setTitle("Sair do preenchimento?")
-                .setMessage("Se você mudar de página agora, os dados não serão salvos.")
-                .setPositiveButton("Sair", (dialog, which) -> {
-                    startActivity(new Intent(this, activityClass));
-                    finish();
-                })
-                .setNegativeButton("Ficar", null)
-                .show();
-    }
-
     private void initViews() {
-        toggleGroupPeriodo = findViewById(R.id.toggleGroupPeriodo);
-        editTextNome = findViewById(R.id.editTextNome);
-        editTextRenda = findViewById(R.id.editTextRenda);
-        editTextOutrosRendimentos = findViewById(R.id.editTextOutrosRendimentos);
-        editTextPrevidencia = findViewById(R.id.editTextPrevidencia);
-        editTextDependentes = findViewById(R.id.editTextDependentes);
-        editTextSaude = findViewById(R.id.editTextSaude);
-        editTextEduPensao = findViewById(R.id.editTextEduPensao);
-        editTextIRRF = findViewById(R.id.editTextIRRF);
+        tabLayoutPeriodo = findViewById(R.id.tabLayoutPeriodo);
+        layoutMensal = findViewById(R.id.layoutMensal);
+        layoutAnual = findViewById(R.id.layoutAnual);
+
+        tabLayoutPeriodo.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    layoutMensal.setVisibility(View.VISIBLE);
+                    layoutAnual.setVisibility(View.GONE);
+                } else {
+                    layoutMensal.setVisibility(View.GONE);
+                    layoutAnual.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+
+        // Campos Mensais
+        editTextRendaMensal = findViewById(R.id.editTextRendaMensal);
+        editTextPrevidenciaMensal = findViewById(R.id.editTextPrevidenciaMensal);
+        editTextDepMensal = findViewById(R.id.editTextDepMensal);
+        btnAutoPreencherMensal = findViewById(R.id.btnAutoPreencherMensal);
+
+        // Campos Anuais
+        editTextRendaAnual = findViewById(R.id.editTextRendaAnual);
+        editTextPrevidenciaAnual = findViewById(R.id.editTextPrevidenciaAnual);
+        editTextDepAnual = findViewById(R.id.editTextDepAnual);
+        editTextSaudeAnual = findViewById(R.id.editTextSaudeAnual);
+        editTextEduAnual = findViewById(R.id.editTextEduAnual);
+        editTextPensaoAnual = findViewById(R.id.editTextPensaoAnual);
+        editTextIRRFAnual = findViewById(R.id.editTextIRRFAnual);
         
         textResumoResultado = findViewById(R.id.textResumoResultado);
         cardUltimoResultado = findViewById(R.id.cardUltimoResultado);
@@ -238,7 +296,6 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         buttonCalcular = findViewById(R.id.buttonCalcular);
         buttonDownloadPDF = findViewById(R.id.buttonDownloadPDF);
         buttonVoltar = findViewById(R.id.VoltarHome);
-        buttonAutoPreencher = findViewById(R.id.buttonAutoPreencher);
     }
 
     private void autoPreencher() {
@@ -248,45 +305,56 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
             return;
         }
 
-        String nome = userPrefs.getString(loggedCpf + "_name", "");
         String renda = userPrefs.getString(loggedCpf + "_renda", "");
         String dependentes = userPrefs.getString(loggedCpf + "_dep", "");
 
-        if (nome.isEmpty() && renda.isEmpty() && dependentes.isEmpty()) {
+        if (renda.isEmpty() && dependentes.isEmpty()) {
             Toast.makeText(this, "Seu perfil está incompleto. Vá em 'Perfil' para preencher.", Toast.LENGTH_LONG).show();
             return;
         }
 
-        editTextNome.setText(nome);
-        editTextRenda.setText(renda);
-        editTextDependentes.setText(dependentes);
+        editTextRendaMensal.setText(renda);
+        editTextDepMensal.setText(dependentes);
         
         Toast.makeText(this, "Dados do perfil carregados!", Toast.LENGTH_SHORT).show();
     }
 
-    private void processarCalculo() {
-        String nome = editTextNome.getText().toString();
-        if (nome.isEmpty()) {
-            Toast.makeText(this, "Por favor, informe seu nome.", Toast.LENGTH_SHORT).show();
-            return;
+    private void processarCalculo(boolean isAnual) {
+        double totalRendimentos, previdencia, saude, edu, pensao, irrfJaPago;
+        int dependentes;
+        String nomeContribuinte = userPrefs.getString(userPrefs.getString("logged_cpf", "") + "_name", "Cidadão");
+
+        if (isAnual) {
+            totalRendimentos = parseDouble(editTextRendaAnual.getText().toString());
+            previdencia = parseDouble(editTextPrevidenciaAnual.getText().toString());
+            dependentes = (int) parseDouble(editTextDepAnual.getText().toString());
+            saude = parseDouble(editTextSaudeAnual.getText().toString());
+            edu = parseDouble(editTextEduAnual.getText().toString());
+            pensao = parseDouble(editTextPensaoAnual.getText().toString());
+            irrfJaPago = parseDouble(editTextIRRFAnual.getText().toString());
+        } else {
+            totalRendimentos = parseDouble(editTextRendaMensal.getText().toString());
+            previdencia = parseDouble(editTextPrevidenciaMensal.getText().toString());
+            dependentes = (int) parseDouble(editTextDepMensal.getText().toString());
+            saude = 0;
+            edu = 0;
+            pensao = 0;
+            irrfJaPago = 0;
         }
 
-        boolean isAnual = toggleGroupPeriodo.getCheckedButtonId() == R.id.btnAnual;
-
-        double rendaPrincipal = parseDouble(editTextRenda.getText().toString());
-        double outrosRendimentos = parseDouble(editTextOutrosRendimentos.getText().toString());
-        double totalRendimentos = rendaPrincipal + outrosRendimentos;
-
-        double previdência = parseDouble(editTextPrevidencia.getText().toString());
-        double saude = parseDouble(editTextSaude.getText().toString());
-        double eduPensao = parseDouble(editTextEduPensao.getText().toString());
-        int dependentes = (int) parseDouble(editTextDependentes.getText().toString());
-        double irrfJaPago = parseDouble(editTextIRRF.getText().toString());
+        if (totalRendimentos <= 0) {
+            Toast.makeText(this, "Informe o rendimento para calcular.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // 1. DEDUÇÕES
         double valorPorDependente = isAnual ? 2275.08 : 189.59;
         double deducaoDependentes = dependentes * valorPorDependente;
-        double totalDeducoes = previdência + saude + eduPensao + deducaoDependentes;
+        
+        // Limite de educação no anual (aprox R$ 3.561,50)
+        double eduEfetiva = isAnual ? Math.min(edu, 3561.50) : edu;
+        
+        double totalDeducoes = previdencia + saude + eduEfetiva + pensao + deducaoDependentes;
 
         // 2. BASE DE CÁLCULO
         double baseCalculo = totalRendimentos - totalDeducoes;
@@ -295,10 +363,10 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         // 3. CÁLCULO DO IMPOSTO DEVIDO (Tabela 2026)
         double impostoDevido = calcularIRPF(baseCalculo, isAnual);
 
-        // 4. RESULTADO FINAL (Restituição ou Pagamento)
-        double resultadoFinal = impostoDevido - irrfJaPago;
+        // 4. RESULTADO FINAL
+        double resultadoFinal = isAnual ? (impostoDevido - irrfJaPago) : impostoDevido;
 
-        exibirResultado(nome, totalRendimentos, totalDeducoes, baseCalculo, impostoDevido, irrfJaPago, resultadoFinal);
+        exibirResultado(nomeContribuinte, totalRendimentos, totalDeducoes, baseCalculo, impostoDevido, irrfJaPago, resultadoFinal, isAnual);
     }
 
     private double parseDouble(String val) {
@@ -335,29 +403,37 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void exibirResultado(String nome, double rendimentos, double deducoes, double base, double devido, double pago, double finalResult) {
+    private void exibirResultado(String nome, double rendimentos, double deducoes, double base, double devido, double pago, double finalResult, boolean isAnual) {
         salvarNoHistorico(nome, pago, finalResult);
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         
         StringBuilder sb = new StringBuilder();
-        sb.append("Contribuinte: ").append(nome).append("\n");
-        sb.append("Rendimento Total: ").append(nf.format(rendimentos)).append("\n");
-        sb.append("Total de Deduções: ").append(nf.format(deducoes)).append("\n");
-        sb.append("Base de Cálculo: ").append(nf.format(base)).append("\n");
-        sb.append("Imposto Devido: ").append(nf.format(devido)).append("\n");
-        sb.append("Imposto já Pago (IRRF): ").append(nf.format(pago)).append("\n\n");
+        sb.append("Olá, ").append(nome).append("!\n\n");
         
-        if (finalResult < 0) {
-            sb.append("VALOR A RESTITUIR: ").append(nf.format(Math.abs(finalResult)));
-        } else if (finalResult > 0) {
-            sb.append("VALOR A PAGAR: ").append(nf.format(finalResult));
+        if (isAnual) {
+            sb.append("Analisamos seus dados de todo o ano:\n");
+            sb.append("• Ganhos totais: ").append(nf.format(rendimentos)).append("\n");
+            sb.append("• Descontos aceitos: ").append(nf.format(deducoes)).append("\n");
+            sb.append("• Valor base: ").append(nf.format(base)).append("\n\n");
+            
+            if (finalResult < 0) {
+                sb.append("BOA NOTÍCIA! 🎉\n");
+                sb.append("Você tem R$ ").append(nf.format(Math.abs(finalResult))).append(" para RECEBER de volta do governo.");
+            } else if (finalResult > 0) {
+                sb.append("AVISO: ✍️\n");
+                sb.append("Você ainda precisa PAGAR R$ ").append(nf.format(finalResult)).append(" de imposto.");
+            } else {
+                sb.append("Tudo certo! Você não deve nada e também não tem valores a receber.");
+            }
         } else {
-            sb.append("SALDO ZERADO (Nada a pagar ou restituir)");
+            sb.append("Baseado no seu salário deste mês:\n");
+            sb.append("• Seu imposto estimado é: ").append(nf.format(finalResult)).append("\n\n");
+            sb.append("Dica: Se esse valor já foi descontado no seu contracheque, você está em dia!");
         }
 
         textResumoResultado.setText(sb.toString());
         cardUltimoResultado.setVisibility(View.VISIBLE);
-        Toast.makeText(this, "Cálculo realizado com sucesso!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Resultado pronto!", Toast.LENGTH_SHORT).show();
     }
 
     private void gerarRelatorioPDF() {

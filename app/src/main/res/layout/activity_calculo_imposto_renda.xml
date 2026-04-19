@@ -17,7 +17,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="gov.br"
+                android:text="@string/gov_br"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -27,295 +27,423 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F0F2F5"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Simulador Completo IRPF 2026"
-                android:textColor="@color/gov_blue"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Preencha com base nos seus informes de rendimentos e recibos."
-                android:textColor="@color/gov_text_gray"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/buttonAutoPreencher"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Preencher com meu perfil"
-                android:textColor="@color/gov_blue"
-                app:icon="@android:drawable/ic_menu_myplaces"
-                app:strokeColor="@color/gov_blue" />
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:id="@+id/toggleGroupPeriodo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:singleSelection="true"
-                app:selectionRequired="true"
-                app:checkedButton="@+id/btnMensal">
-                <Button
-                    android:id="@+id/btnMensal"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Simulação Mensal" />
-                <Button
-                    android:id="@+id/btnAnual"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Declaração Anual" />
-            </com.google.android.material.button.MaterialButtonToggleGroup>
+            android:padding="24dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="24dp">
 
-                    <!-- SEÇÃO 1: IDENTIFICAÇÃO -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1. IDENTIFICAÇÃO"
-                        android:textColor="@color/gov_blue"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="12dp"/>
+                        android:text="@string/simulador_ir_title"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Seu Nome Completo"
-                        app:helperText="Como aparece no seu documento oficial (CPF)">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextNome"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPersonName" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- SEÇÃO 2: RENDIMENTOS -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2. RENDIMENTOS (O QUE VOCÊ GANHOU)"
-                        android:textColor="@color/gov_blue"
-                        android:textStyle="bold"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="12dp"/>
+                        android:layout_marginTop="4dp"
+                        android:text="@string/simulador_subtitle"
+                        android:textColor="#5F6368"
+                        android:textSize="14sp" />
 
-                    <LinearLayout
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:hint="Salário Mensal (Valor Bruto)"
-                            app:helperText="O valor total antes dos descontos.">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editTextRenda"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="numberDecimal" />
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <ImageButton
-                            android:id="@+id/btnEvidenciaRenda"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_marginStart="8dp"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:src="@android:drawable/ic_menu_camera"
-                            app:tint="@color/gov_blue"
-                            android:contentDescription="Anexar contracheque" />
-                    </LinearLayout>
+                        android:layout_marginTop="20dp"
+                        app:cardBackgroundColor="#E8EAED"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:hint="Outros Ganhos (Extras)">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editTextOutrosRendimentos"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="numberDecimal" />
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <ImageButton
-                            android:id="@+id/btnEvidenciaOutros"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_marginStart="8dp"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:src="@android:drawable/ic_menu_camera"
-                            app:tint="@color/gov_blue"
-                            android:contentDescription="Anexar comprovante de outros ganhos" />
-                    </LinearLayout>
-
-                    <!-- SEÇÃO 3: DEDUÇÕES -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3. DEDUÇÕES (O QUE DIMINUI O IMPOSTO)"
-                        android:textColor="@color/gov_blue"
-                        android:textStyle="bold"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="12dp"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Desconto do INSS"
-                        app:helperText="Veja o campo 'Previdência Oficial' no seu contracheque mensal.">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextPrevidencia"
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabLayoutPeriodo"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_height="40dp"
+                            android:layout_margin="4dp"
+                            android:background="@android:color/transparent"
+                            app:tabBackground="@drawable/tab_selector_rounded"
+                            app:tabIndicatorHeight="0dp"
+                            app:tabRippleColor="@android:color/transparent"
+                            app:tabSelectedTextColor="@color/white"
+                            app:tabTextColor="@color/gov_blue"
+                            app:tabTextAppearance="@style/CustomTabText">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="Quantos dependentes você tem?"
-                        app:helperText="Ex: Filhos, pais ou cônjuge. Cada um abate R$ 189,59 do imposto.">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextDependentes"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:hint="Gastos com Saúde"
-                            app:helperText="Ex: Plano de saúde, dentista, médicos.">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editTextSaude"
-                                android:layout_width="match_parent"
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:inputType="numberDecimal" />
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <ImageButton
-                            android:id="@+id/btnEvidenciaSaude"
-                            android:layout_width="48dp"
+                                android:text="@string/simulacao_mensal" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/simulacao_anual" />
+                        </com.google.android.material.tabs.TabLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- TELA 1: SIMULAÇÃO MENSAL -->
+                    <LinearLayout
+                        android:id="@+id/layoutMensal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <Button
+                            android:id="@+id/btnAutoPreencherMensal"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="match_parent"
                             android:layout_height="48dp"
-                            android:layout_marginStart="8dp"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:src="@android:drawable/ic_menu_camera"
-                            app:tint="@color/gov_blue"
-                            android:contentDescription="Anexar recibo médico" />
+                            android:layout_marginTop="16dp"
+                            android:text="@string/preencher_perfil"
+                            android:textAllCaps="false"
+                            android:textColor="@color/gov_blue"
+                            app:cornerRadius="8dp"
+                            app:icon="@android:drawable/ic_menu_myplaces" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:text="@string/pergunta_renda_mensal"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_renda_mensal"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="16dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextRendaMensal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:inputType="numberDecimal"
+                                android:hint="@string/hint_renda_mensal" />
+
+                            <ImageButton
+                                android:id="@+id/btnEvidenciaRendaMensal"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@android:drawable/ic_menu_camera"
+                                android:contentDescription="@string/app_name"
+                                app:tint="@color/gov_blue" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pergunta_inss_mensal"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_inss_mensal"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextPrevidenciaMensal"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:inputType="numberDecimal"
+                            android:paddingHorizontal="16dp"
+                            android:hint="@string/hint_inss_mensal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pergunta_dep_mensal"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_dep_mensal"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextDepMensal"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:inputType="number"
+                            android:paddingHorizontal="16dp"
+                            android:hint="@string/hint_dep_mensal" />
+
+                        <Button
+                            android:id="@+id/btnCalcularMensal"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="24dp"
+                            android:backgroundTint="@color/gov_blue"
+                            android:text="@string/btn_calcular_mensal"
+                            android:textAllCaps="false"
+                            android:visibility="gone"
+                            app:cornerRadius="8dp" />
                     </LinearLayout>
 
+                    <!-- TELA 2: SIMULAÇÃO ANUAL (COMPLETA) -->
                     <LinearLayout
+                        android:id="@+id/layoutAnual"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Educação ou Pensão Paga"
-                            app:helperText="Ex: Escola, Faculdade ou Pensão.">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editTextEduPensao"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="numberDecimal" />
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <ImageButton
-                            android:id="@+id/btnEvidenciaEdu"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_marginStart="8dp"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:src="@android:drawable/ic_menu_camera"
-                            app:tint="@color/gov_blue"
-                            android:contentDescription="Anexar boleto escolar" />
-                    </LinearLayout>
+                            android:layout_marginTop="24dp"
+                            android:text="@string/pergunta_renda_anual"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
-                    <!-- SEÇÃO 4: IMPOSTO PAGO -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4. IMPOSTO JÁ PAGO (IRRF)"
-                        android:textColor="@color/gov_blue"
-                        android:textStyle="bold"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="12dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_renda_anual"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Imposto já descontado (IRRF)"
-                        app:helperText="Procure por 'IRRF' no seu holerite. É o que você já pagou durante o ano.">
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextIRRF"
+                            android:id="@+id/editTextRendaAnual"
                             android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:inputType="numberDecimal"
+                            android:paddingHorizontal="16dp"
+                            android:hint="@string/hint_renda_anual" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pergunta_inss_anual"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_inss_anual"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextPrevidenciaAnual"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:inputType="numberDecimal"
+                            android:paddingHorizontal="16dp"
+                            android:hint="@string/hint_inss_anual" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pergunta_dep_mensal"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_dep_mensal"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextDepAnual"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:inputType="number"
+                            android:paddingHorizontal="16dp"
+                            android:hint="@string/hint_dep_mensal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pergunta_saude_anual"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_saude_anual"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="16dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextSaudeAnual"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:inputType="numberDecimal"
+                                android:hint="@string/hint_saude_anual" />
+
+                            <ImageButton
+                                android:id="@+id/btnEvidenciaSaudeAnual"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@android:drawable/ic_menu_camera"
+                                android:contentDescription="@string/app_name"
+                                app:tint="@color/gov_blue" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pergunta_edu_anual"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_edu_anual"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextEduAnual"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:inputType="numberDecimal"
+                            android:paddingHorizontal="16dp"
+                            android:hint="@string/hint_edu_anual" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pergunta_pensao_anual"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_pensao_anual"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextPensaoAnual"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:inputType="numberDecimal"
+                            android:paddingHorizontal="16dp"
+                            android:hint="@string/hint_pensao_anual" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pergunta_irrf_anual"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/legenda_irrf_anual"
+                            android:textColor="#757575"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextIRRFAnual"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/edit_text_rounded_outline"
+                            android:inputType="numberDecimal"
+                            android:paddingHorizontal="16dp"
+                            android:hint="@string/hint_irrf_anual" />
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/buttonCalcular"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="32dp"
                         android:backgroundTint="@color/gov_blue"
-                        android:text="REALIZAR CÁLCULO PROFISSIONAL"
-                        android:textStyle="bold"
+                        android:text="@string/btn_calcular_anual"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
                         app:cornerRadius="8dp" />
 
                 </LinearLayout>
@@ -326,45 +454,52 @@
                 android:id="@+id/cardUltimoResultado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:visibility="gone"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:strokeColor="@color/gov_blue"
-                app:strokeWidth="1dp">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp"
-                    android:background="#F4F8FB">
+                    android:padding="24dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="PARECER DO CONTADOR DIGITAL"
-                        android:textColor="@color/gov_blue"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="12dp"/>
+                        android:text="@string/parecer_titulo"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textResumoResultado"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gov_text_gray"
-                        android:lineSpacingExtra="6dp"
-                        android:textSize="15sp" />
+                        android:layout_marginTop="12dp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="#5F6368"
+                        android:textSize="14sp" />
 
                     <Button
                         android:id="@+id/buttonDownloadPDF"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="BAIXAR RECIBO COMPLETO (PDF)"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="24dp"
+                        android:backgroundTint="#E8F0FE"
+                        android:text="@string/btn_pdf"
+                        android:textAllCaps="false"
+                        android:textColor="@color/gov_blue"
+                        android:textSize="16sp"
                         android:textStyle="bold"
-                        app:icon="@android:drawable/ic_menu_save" />
+                        app:cornerRadius="8dp"
+                        app:icon="@android:drawable/ic_menu_save"
+                        app:iconPadding="12dp"
+                        app:iconTint="@color/gov_blue" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -374,10 +509,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="40dp"
-                android:text="VOLTAR AO MENU"
-                android:textColor="@color/gov_text_gray" />
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="60dp"
+                android:text="@string/btn_voltar_menu"
+                android:textColor="#5F6368" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
