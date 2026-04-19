@@ -1,4 +1,4 @@
-#🇧🇷 CalculaGov - Seu Contador Digital IRPF 2026
+# 🇧🇷 CalculaGov - Seu Contador Digital IRPF 2026
 
 O **CalculaGov** evoluiu de um simples simulador para um **Gestor de Riscos e Planejador Fiscal** completo. Com identidade visual oficial do padrão **gov.br**, o app agora integra inteligência artificial para leitura de recibos e conexão direta com o ecossistema do Governo Federal.
 
