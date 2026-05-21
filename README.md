@@ -1,62 +1,86 @@
-# 🇧🇷 CalculaGov - Seu Contador Digital IRPF 2026
+# 🇧🇷 CalculaGov - Planejador Fiscal e Organizador de Evidências
+> **Projeto de Extensão Universitária – Produção de Tecnologia Social**
 
-O **CalculaGov** evoluiu de um simples simulador para um **Ecosistema Digital de Gestão Fiscal**. Com identidade visual oficial do padrão **gov.br**, o app agora atua como um assistente completo para o IRPF 2026, garantindo segurança, organização de documentos e economia real.
-
----
-
-## 🚀 Novidades da Versão "Contador Digital"
-
-### 🔐 Segurança Biométrica e Privacidade
-- **Login Seguro:** Acesso protegido por **Biometria (Digital/Face)** via `BiometricHelper`, integrado ao padrão de segurança gov.br.
-- **Privacidade Máxima:** Logout rápido (`btnPowerOff`) e máscaras de dados (CPF/RG) que protegem sua identidade visualmente.
-- **Deep Linking:** Preparado para integração com o app oficial `br.gov.meugovbr`.
-
-### 🤖 IA Auditora e Gestão de Evidências (OCR)
-- **Câmera Inteligente:** Use a câmera para ler recibos médicos ou escolares. O **Google ML Kit** identifica valores e preenche os campos automaticamente.
-- **Pasta de Comprovantes:** Galeria dedicada para organizar seus recibos. Agora com funcionalidade de **exclusão individual** para manter sua nuvem limpa.
-- **Proteção Malha Fina:** Gere relatórios PDF que anexam as fotos dos comprovantes, servindo como sua pasta de evidências digital.
-
-### 📉 Comparativo de Modelos e Automação
-- **Consultoria Automática:** Cálculo simultâneo entre os modelos **Simplificado** e **Completo**, com alerta visual (Verde/Azul) da melhor opção.
-- **Histórico Inteligente:** Salve suas simulações e gerencie-as individualmente (exclua o que não serve mais).
-- **Auto-preenchimento:** Importe dados de renda e dependentes diretamente do seu perfil verificado.
-
-### 📅 Painel do Cidadão (Home)
-- **Calendário Fiscal 2026:** Acompanhe os prazos de entrega (15 de Março a 31 de Maio) com interface dinâmica.
-- **Dicas do Leão:** Carrossel educativo com orientações sobre deduções e boas práticas fiscais.
+O **CalculaGov** é um ecossistema digital mobile desenvolvido para democratizar o acesso à gestão fiscal no Brasil. Mais que um simulador, o aplicativo atua como um assistente de cidadania, integrando Inteligência Artificial, segurança biométrica e serviços públicos digitais para simplificar a jornada do IRPF 2026.
 
 ---
 
-## 📸 Funcionalidades em Destaque
+## 1. DIAGNÓSTICO E TEORIZAÇÃO
 
-### 1. Central de Comprovantes
-Gerencie todos os seus recibos lidos pela IA em um só lugar. Use o ícone de lixeira (`ic_delete`) para remover documentos antigos com feedback instantâneo.
+### 1.1 - Identificação das partes envolvidas e parceiros
+Este projeto foi concebido para impactar cidadãos de baixa e média renda da comunidade local, trabalhadores assalariados e autônomos com renda mensal entre 1 e 5 salários mínimos. 
+- **Desenvolvedor:** Aluno do Curso de [Seu Curso], Faculdade [Nome da Instituição].
+- **Público-alvo:** Residentes de comunidades locais com dificuldade em organizar recibos e entender a legislação tributária.
 
-### 2. Relatório de Auditoria (PDF)
-Gere um PDF profissional via **iText7** que inclui não apenas os cálculos, mas também as **fotos dos recibos**. Graças ao novo `FileProvider`, o compartilhamento e visualização são imediatos e seguros.
+### 1.2 - Situação-problema identificada
+A ausência de ferramentas gratuitas e acessíveis resulta em desorganização financeira (perda de recibos dedutíveis), gastos desnecessários com consultorias básicas e insegurança digital, levando muitos cidadãos a caírem na "Malha Fina" por erros de preenchimento que poderiam ser evitados com conferência prévia.
 
-### 3. Máscaras e Validação
-Interface otimizada para entrada de dados brasileira (CPF: `000.000.000-00`), evitando erros de preenchimento que levam à malha fina.
+### 1.3 - Demanda sociocomunitária e motivação acadêmica
+O projeto atende à necessidade de transformar o celular em um "contador de bolso". Academicamente, a motivação reside na aplicação prática de **Visão Computacional (ML Kit)**, **Segurança Mobile (Biometria)** e **Integração de APIs de Governo (Brasil API)**, consolidando conhecimentos de engenharia de software voltados ao impacto social.
 
----
-
-## 🛠️ Tecnologias e APIs
-
-- **Segurança:** `androidx.biometric` para autenticação nativa.
-- **Inteligência Artificial:** `ML Kit Text Recognition` para OCR de recibos.
-- **Relatórios:** `iText7` para geração de documentos fiscais complexos.
-- **Persistência:** `SharedPreferences` para histórico de cálculos com gestão de estado.
-- **UI/UX:** Material Design 3 com a paleta oficial `#00387E` (Azul) e `#FFCC00` (Ouro).
+### 1.4 - Objetivos a serem alcançados
+- Realizar simulações precisas de IRPF (Mensal e Anual) baseadas na tabela oficial.
+- Automatizar a coleta de dados de recibos via OCR (Scanner de IA).
+- Garantir 100% de privacidade através do isolamento de dados por CPF e biometria opcional.
+- Gerar dossiês em PDF com as fotos das evidências anexadas.
 
 ---
 
-## 💻 Como Operar
+## 2. PLANEJAMENTO E METODOLOGIA
 
-1.  **Acesse com Segurança:** Use sua biometria para entrar no perfil.
-2.  **Organize-se:** Use a câmera para escanear recibos ao longo do ano.
-3.  **Simule:** Use o "Auto-preencher" para carregar seus dados básicos.
-4.  **Compare:** Siga a "Dica de Economia" para escolher o melhor modelo de declaração.
-5.  **Exporte:** Gere seu dossiê em PDF com todas as evidências anexadas.
+### 2.1 - Plano de trabalho e Cronograma
+1. **Semana 1-2:** Levantamento de requisitos e estudo da legislação tributária 2026.
+2. **Semana 3-4:** Modelagem UI/UX seguindo o padrão de design oficial **gov.br**.
+3. **Semana 5-8:** Desenvolvimento core: cálculos, integração Brasil API e ML Kit.
+4. **Semana 9-10:** Implementação de camadas de segurança e isolamento multi-usuário.
+5. **Semana 11-12:** Testes de estresse, validação de precisão e auditoria de privacidade.
+
+### 2.2 - Metodologia (Tech Stack)
+- **Linguagem:** Java (Android SDK).
+- **Rede:** Retrofit + Gson (Integração com Brasil API para busca de CEP).
+- **IA:** Google ML Kit (Extração de valores monetários de imagens).
+- **Segurança:** `androidx.biometric` e `SharedPreferences` isoladas por hash de CPF.
+- **Relatórios:** iText7 para exportação de PDFs de auditoria.
+
+### 2.3 - Avaliação dos resultados
+O sucesso do projeto foi medido pela precisão matemática dos cálculos (comparados ao sistema da Receita Federal) e pela eficácia da separação de diretórios, garantindo que um usuário nunca acesse os documentos de outro no mesmo dispositivo.
 
 ---
-*Aviso: O CalculaGov é uma ferramenta de apoio e simulação. Sempre confira os dados finais no programa oficial da Receita Federal do Brasil.*
+
+## 3. FUNCIONALIDADES DE IMPACTO
+
+### 🔐 Segurança e Privacidade Multi-usuário
+- **Isolamento Total:** Históricos de cálculos e pastas de fotos são criados dinamicamente usando o CPF como chave única.
+- **Biometria Flexível:** O cidadão pode optar por exigir a digital para abrir áreas sensíveis (Cálculos, Histórico, Perfil) através de um switch nas configurações de Perfil.
+- **Backup Desativado:** Configuração de segurança que impede a extração de dados sensíveis via backups externos (ADB).
+
+### 🤖 IA Auditora (OCR)
+O módulo de simulação permite fotografar um recibo. A IA identifica o valor mais relevante e preenche o campo automaticamente, reduzindo erros humanos de digitação.
+
+### 🗺️ Integração com Brasil API
+No cadastro de perfil, ao digitar os 8 dígitos do CEP, o app consome a **Brasil API** para preencher Cidade, UF e Logradouro instantaneamente, melhorando a experiência do usuário.
+
+### 📅 Painel dinâmico (Home)
+- **Calendário Fiscal:** Exibição do prazo de entrega das declarações.
+- **Dicas do Leão:** Conteúdo educativo rotativo para prevenir erros fiscais.
+
+---
+
+## 4. EVIDÊNCIAS DE DESENVOLVIMENTO
+
+O desenvolvimento foi registrado através de:
+1. **Capturas de IDE:** Mostrando a implementação do `BiometricHelper` e lógica de cálculo.
+2. **Auditoria de Arquivos:** Prova técnica da criação de subpastas `/Pictures/{CPF}` para isolamento de dados.
+3. **Simulação de Fluxo:** Gravações do scanner de IA extraindo dados de recibos reais.
+4. **Layout Responsivo:** Validação do aplicativo em diferentes resoluções (celulares e tablets) sem distorção.
+
+---
+
+## 🛠️ Como Executar
+1. Clone o repositório.
+2. Abra no Android Studio (Hedgehog ou superior).
+3. Realize o **Gradle Sync**.
+4. Execute em um emulador ou dispositivo físico com Android 7.0 (API 24) ou superior.
+
+---
+*Este aplicativo é uma ferramenta de simulação pedagógica. Os dados finais devem sempre ser validados no programa oficial da Receita Federal.*
