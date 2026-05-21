@@ -9,8 +9,8 @@ O **CalculaGov** é um ecossistema digital mobile desenvolvido para democratizar
 
 ### 🤝 1.1 - Identificação das partes envolvidas e parceiros
 - **Público-alvo:** Cidadãos de baixa e média renda (1 a 5 salários mínimos), trabalhadores assalariados e autônomos da comunidade local com dificuldade em organizar recibos e entender a legislação tributária.
-- **Desenvolvedor:** [Seu Nome aqui] – Aluno de Engenharia de Software/Sistemas de Informação.
-- **Faculdade:** [Nome da Instituição].
+- **Desenvolvedor:** Flavio Felipe – Aluno de Análise e Desenvolvimento de Sistemas.
+- **Faculdade:** Estácio.
 
 ### ⚠️ 1.2 - Situação-problema identificada
 A ausência de ferramentas gratuitas e acessíveis resulta em desorganização financeira (perda de recibos dedutíveis), gastos desnecessários com consultorias básicas e insegurança digital, levando muitos cidadãos à "Malha Fina" por erros que poderiam ser evitados com conferência prévia.
