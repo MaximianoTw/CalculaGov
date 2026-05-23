@@ -117,7 +117,8 @@
                             android:textAllCaps="false"
                             android:textColor="@color/gov_blue"
                             app:cornerRadius="8dp"
-                            app:icon="@android:drawable/ic_menu_myplaces" />
+                            app:icon="@drawable/ic_profile"
+                            app:iconTint="@color/gov_blue" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -154,11 +155,12 @@
 
                             <ImageButton
                                 android:id="@+id/btnEvidenciaRendaMensal"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@android:drawable/ic_menu_camera"
-                                android:contentDescription="@string/app_name"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/bg_icon_soft_blue"
+                                android:contentDescription="Anexar comprovante"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_camera"
                                 app:tint="@color/gov_blue" />
                         </LinearLayout>
 
@@ -347,11 +349,12 @@
 
                             <ImageButton
                                 android:id="@+id/btnEvidenciaSaudeAnual"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@android:drawable/ic_menu_camera"
-                                android:contentDescription="@string/app_name"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/bg_icon_soft_blue"
+                                android:contentDescription="Anexar comprovante"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_camera"
                                 app:tint="@color/gov_blue" />
                         </LinearLayout>
 
@@ -588,7 +591,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:cornerRadius="8dp"
-                        app:icon="@android:drawable/ic_menu_save"
+                        app:icon="@drawable/ic_documents"
                         app:iconPadding="12dp"
                         app:iconTint="@color/gov_blue" />
 
@@ -605,7 +608,7 @@
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:cornerRadius="8dp"
-                        app:icon="@android:drawable/ic_menu_agenda"
+                        app:icon="@drawable/ic_history"
                         app:iconPadding="12dp"
                         app:iconTint="#856404" />
                 </LinearLayout>

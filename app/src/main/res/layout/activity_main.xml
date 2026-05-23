@@ -110,7 +110,9 @@
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:cornerRadius="8dp" />
+                        app:cornerRadius="8dp"
+                        app:icon="@drawable/ic_calculator"
+                        app:iconTint="@color/white" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

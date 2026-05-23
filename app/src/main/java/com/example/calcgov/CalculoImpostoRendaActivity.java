@@ -55,7 +55,7 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
             editTextEduAnual, editTextPensaoAnual, editTextIRRFAnual;
     private TextView textResumoResultado, textResultadoSimplificado, textResultadoCompleto, textDicaEconomia;
     private View cardUltimoResultado, layoutMensal, layoutAnual, cardComparativo;
-    private Button buttonCalcular, buttonDownloadPDF, buttonVoltar, btnAutoPreencherMensal;
+    private Button buttonCalcular, buttonDownloadPDF, buttonVoltar, btnAutoPreencherMensal, buttonSalvarCalculo;
     private TabLayout tabLayoutPeriodo;
     private SharedPreferences sharedPreferences, userPrefs;
     
@@ -64,6 +64,10 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
     private ActivityResultLauncher<String> pickImageLauncher;
     private TextInputEditText currentTargetEditText;
     private List<String> evidencePaths = new ArrayList<>();
+    private String ultimoCalculoNome = "";
+    private double ultimoCalculoIrPago = 0;
+    private double ultimoCalculoResultado = 0;
+    private boolean existeCalculoParaSalvar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -342,25 +346,28 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
         
         buttonCalcular = findViewById(R.id.buttonCalcular);
         buttonDownloadPDF = findViewById(R.id.buttonDownloadPDF);
-        Button buttonSalvarCalculo = findViewById(R.id.buttonSalvarCalculo);
+        buttonSalvarCalculo = findViewById(R.id.buttonSalvarCalculo);
         buttonVoltar = findViewById(R.id.VoltarHome);
 
-        buttonSalvarCalculo.setOnClickListener(v -> {
-            String nome = userPrefs.getString(userPrefs.getString("logged_cpf", "") + "_name", "Cidadão");
-            String resumo = textResumoResultado.getText().toString();
-            if (!resumo.isEmpty()) {
-                double finalResult = 0;
-                if (resumo.contains("Restituição")) {
-                    finalResult = -1;
-                }
-                salvarNoHistorico(nome, 0, finalResult);
-                Toast.makeText(this, "Cálculo salvo no histórico!", Toast.LENGTH_SHORT).show();
-                buttonSalvarCalculo.setEnabled(false);
-                buttonSalvarCalculo.setAlpha(0.5f);
-            }
-        });
+        buttonSalvarCalculo.setOnClickListener(v -> salvarCalculoEAbrirHistorico());
 
         buttonDownloadPDF.setOnClickListener(v -> gerarRelatorioPDF());
+    }
+
+    private void salvarCalculoEAbrirHistorico() {
+        if (!existeCalculoParaSalvar) {
+            Toast.makeText(this, "Gere um cálculo antes de salvar.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        salvarNoHistorico(ultimoCalculoNome, ultimoCalculoIrPago, ultimoCalculoResultado);
+        existeCalculoParaSalvar = false;
+        buttonSalvarCalculo.setEnabled(false);
+        buttonSalvarCalculo.setAlpha(0.5f);
+
+        Toast.makeText(this, "Cálculo salvo no histórico!", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, HistoricoActivity.class));
+        finish();
     }
 
     private void autoPreencher() {
@@ -522,7 +529,13 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
     }
 
     private void exibirResultado(String nome, double rendimentos, double deducoes, double base, double devido, double pago, double finalResult, boolean isAnual) {
-        salvarNoHistorico(nome, pago, finalResult);
+        ultimoCalculoNome = nome;
+        ultimoCalculoIrPago = pago;
+        ultimoCalculoResultado = finalResult;
+        existeCalculoParaSalvar = true;
+        buttonSalvarCalculo.setEnabled(true);
+        buttonSalvarCalculo.setAlpha(1f);
+
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         
         StringBuilder sb = new StringBuilder();
@@ -535,10 +548,10 @@ public class CalculoImpostoRendaActivity extends AppCompatActivity {
             sb.append("• Valor base: ").append(nf.format(base)).append("\n\n");
             
             if (finalResult < 0) {
-                sb.append("BOA NOTÍCIA! 🎉\n");
+                sb.append("BOA NOTÍCIA!\n");
                 sb.append("Você tem R$ ").append(nf.format(Math.abs(finalResult))).append(" para RECEBER de volta do governo.");
             } else if (finalResult > 0) {
-                sb.append("AVISO: ✍️\n");
+                sb.append("AVISO:\n");
                 sb.append("Você ainda precisa PAGAR R$ ").append(nf.format(finalResult)).append(" de imposto.");
             } else {
                 sb.append("Tudo certo! Você não deve nada e também não tem valores a receber.");

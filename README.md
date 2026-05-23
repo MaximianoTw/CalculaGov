@@ -5,6 +5,24 @@ O **CalculaGov** é um ecossistema digital mobile desenvolvido para democratizar
 
 ---
 
+## 📱 Screenshots do Aplicativo
+
+Capturas realizadas no emulador Android com dados demonstrativos.
+
+| Tela inicial | Login | Home |
+|---|---|---|
+| <img src="docs/screenshots/01-inicio.png" width="220" alt="Tela inicial do CalculaGov"> | <img src="docs/screenshots/02-login.png" width="220" alt="Tela de login do CalculaGov"> | <img src="docs/screenshots/03-home.png" width="220" alt="Tela home do CalculaGov"> |
+
+| Simulador | Resultado | Histórico |
+|---|---|---|
+| <img src="docs/screenshots/04-simulador.png" width="220" alt="Simulador de imposto de renda"> | <img src="docs/screenshots/05-resultado.png" width="220" alt="Resultado da simulação de imposto"> | <img src="docs/screenshots/06-historico.png" width="220" alt="Histórico de cálculos"> |
+
+| Exclusão de registro |
+|---|
+| <img src="docs/screenshots/07-excluir-registro.png" width="220" alt="Confirmação de exclusão de registro"> |
+
+---
+
 ## 📑 1. DIAGNÓSTICO E TEORIZAÇÃO
 
 ### 🤝 1.1 - Identificação das partes envolvidas e parceiros

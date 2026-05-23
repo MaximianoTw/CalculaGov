@@ -52,7 +52,8 @@
                 android:layout_alignParentEnd="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_delete"
-                android:contentDescription="Excluir" />
+                android:contentDescription="Excluir"
+                app:tint="@android:color/holo_red_dark" />
         </RelativeLayout>
 
         <View

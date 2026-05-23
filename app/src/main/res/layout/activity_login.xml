@@ -111,6 +111,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:cornerRadius="8dp"
+                        app:icon="@drawable/ic_profile"
                         app:iconTint="@color/white"
                         app:iconGravity="textStart" />
 
@@ -180,7 +181,9 @@
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             android:textSize="16sp"
-                            app:cornerRadius="8dp" />
+                            app:cornerRadius="8dp"
+                            app:icon="@drawable/ic_lock"
+                            app:iconTint="@color/white" />
                     </LinearLayout>
 
                     <!-- Signup Section -->
@@ -292,7 +295,9 @@
                             android:textAllCaps="false"
                             android:textColor="@color/gov_blue"
                             android:textSize="16sp"
-                            app:cornerRadius="8dp" />
+                            app:cornerRadius="8dp"
+                            app:icon="@drawable/ic_profile"
+                            app:iconTint="@color/gov_blue" />
                     </LinearLayout>
 
                 </LinearLayout>

@@ -82,5 +82,7 @@
     <string name="hint_data">00/00/0000</string>
     <string name="label_estado_civil">Estado Civil</string>
     <string name="label_titulo_eleitor">Título de Eleitor</string>
+    <string name="label_biometria">Proteger perfil com biometria</string>
+    <string name="desc_biometria">Desativado por padrão. Ative somente em aparelhos com biometria cadastrada.</string>
     <string name="btn_desbloquear_edicao">DESBLOQUEAR PARA EDITAR</string>
 </resources>

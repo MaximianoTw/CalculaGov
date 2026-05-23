@@ -68,7 +68,7 @@
                     android:id="@+id/imgSeloGov"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@android:drawable/checkbox_on_background"
+                    android:src="@drawable/ic_check_circle"
                     android:contentDescription="Selo gov.br"
                     app:tint="@color/gov_blue" />
 
@@ -289,6 +289,49 @@
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="24dp"
+                        android:background="#E0E0E0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_biometria"
+                                android:textColor="@color/gov_blue"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/desc_biometria"
+                                android:textColor="@color/gov_text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchBiometria"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp" />
+                    </LinearLayout>
+
                     <Button
                         android:id="@+id/buttonDesbloquear"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -298,7 +341,8 @@
                         android:text="@string/btn_desbloquear_edicao"
                         android:textColor="@color/gov_blue"
                         android:visibility="gone"
-                        app:icon="@android:drawable/ic_lock_idle_lock"
+                        app:icon="@drawable/ic_lock"
+                        app:iconTint="@color/gov_blue"
                         app:strokeColor="@color/gov_blue" />
 
                     <Button

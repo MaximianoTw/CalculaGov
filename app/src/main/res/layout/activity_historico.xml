@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/historicoRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gov_gray_light"
@@ -76,7 +77,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="LIMPAR HISTÓRICO"
-            android:textColor="@android:color/holo_red_dark" />
+            android:textColor="@android:color/holo_red_dark"
+            app:icon="@drawable/ic_delete"
+            app:iconTint="@android:color/holo_red_dark" />
 
     </LinearLayout>
 

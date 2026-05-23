@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -32,8 +33,10 @@ public class PerfilActivity extends AppCompatActivity {
     private TextView txtStatusGov;
     private ImageView imgSeloGov;
     private LinearLayout containerDep, layoutStatusGov;
+    private SwitchMaterial switchBiometria;
     private SharedPreferences sharedPreferences;
     private String loggedCpf;
+    private boolean isUpdatingBiometricSwitch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         initViews();
         loadPerfilData();
+        setupBiometricSwitch();
         setupNavigation();
 
         btnSalvar.setOnClickListener(v -> salvarPerfil());
@@ -70,6 +74,7 @@ public class PerfilActivity extends AppCompatActivity {
         btnDesbloquear = findViewById(R.id.buttonDesbloquear);
         txtStatusGov = findViewById(R.id.txtStatusGov);
         imgSeloGov = findViewById(R.id.imgSeloGov);
+        switchBiometria = findViewById(R.id.switchBiometria);
 
         setupMasks();
         
@@ -212,6 +217,7 @@ public class PerfilActivity extends AppCompatActivity {
             editDep.setText(sharedPreferences.getString(loggedCpf + "_dep", ""));
             editNomeDep.setText(sharedPreferences.getString(loggedCpf + "_dep_nome", ""));
             editCPFDep.setText(sharedPreferences.getString(loggedCpf + "_dep_cpf", ""));
+            switchBiometria.setChecked(BiometricHelper.isBiometricEnabled(this));
 
             boolean isGovVerified = sharedPreferences.getString(loggedCpf + "_is_gov_verified", "false").equals("true");
             if (isGovVerified) {
@@ -224,6 +230,47 @@ public class PerfilActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void setupBiometricSwitch() {
+        switchBiometria.setEnabled(!loggedCpf.isEmpty());
+        switchBiometria.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isUpdatingBiometricSwitch) return;
+
+            if (!isChecked) {
+                BiometricHelper.setBiometricEnabled(this, false);
+                Toast.makeText(this, "Biometria desativada.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!BiometricHelper.canUseBiometric(this)) {
+                updateBiometricSwitch(false);
+                BiometricHelper.setBiometricEnabled(this, false);
+                Toast.makeText(this, "Biometria indisponível ou não configurada neste dispositivo.", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            BiometricHelper.showBiometricPrompt(this, new BiometricHelper.BiometricCallback() {
+                @Override
+                public void onAuthenticationSucceeded() {
+                    BiometricHelper.setBiometricEnabled(PerfilActivity.this, true);
+                    Toast.makeText(PerfilActivity.this, "Biometria ativada.", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onAuthenticationError(String error) {
+                    updateBiometricSwitch(false);
+                    BiometricHelper.setBiometricEnabled(PerfilActivity.this, false);
+                    Toast.makeText(PerfilActivity.this, "Não foi possível ativar a biometria.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+    }
+
+    private void updateBiometricSwitch(boolean checked) {
+        isUpdatingBiometricSwitch = true;
+        switchBiometria.setChecked(checked);
+        isUpdatingBiometricSwitch = false;
     }
 
     private void bloquearCampos(boolean bloquear) {

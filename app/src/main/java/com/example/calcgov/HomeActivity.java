@@ -42,10 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnPowerOff).setOnClickListener(v -> {
-            SharedPreferences.Editor editor = userPrefs.edit();
-            editor.remove("logged_cpf");
-            editor.apply();
-            finish();
+            logout();
         });
         
         cardProfileAlert.setOnClickListener(v -> {
@@ -67,8 +64,17 @@ public class HomeActivity extends AppCompatActivity {
         cardLastResult = findViewById(R.id.cardLastResult);
     }
 
+    private void logout() {
+        userPrefs.edit().remove("logged_cpf").apply();
+
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        Toast.makeText(this, "Sessão encerrada.", Toast.LENGTH_SHORT).show();
+    }
+
     private void checkBiometricsAndNavigate(Class<?> targetActivity) {
-        BiometricHelper.showBiometricPrompt(this, new BiometricHelper.BiometricCallback() {
+        BiometricHelper.authenticateIfEnabled(this, new BiometricHelper.BiometricCallback() {
             @Override
             public void onAuthenticationSucceeded() {
                 startActivity(new Intent(HomeActivity.this, targetActivity));

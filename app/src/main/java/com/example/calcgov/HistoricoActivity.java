@@ -6,18 +6,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +29,7 @@ public class HistoricoActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private HistoricoAdapter adapter;
     private SharedPreferences sharedPreferences;
+    private View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class HistoricoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historico);
 
         sharedPreferences = getSharedPreferences("CalculosHistory", MODE_PRIVATE);
+        rootView = findViewById(R.id.historicoRoot);
         
         recyclerView = findViewById(R.id.recyclerViewHistorico);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -40,9 +45,7 @@ public class HistoricoActivity extends AppCompatActivity {
         loadHistorico();
 
         findViewById(R.id.buttonLimparHistorico).setOnClickListener(v -> {
-            sharedPreferences.edit().clear().apply();
-            loadHistorico();
-            Toast.makeText(this, "Histórico limpo!", Toast.LENGTH_SHORT).show();
+            showClearHistoryDialog();
         });
 
         setupNavigation();
@@ -50,45 +53,156 @@ public class HistoricoActivity extends AppCompatActivity {
 
     private void loadHistorico() {
         Map<String, ?> allEntries = sharedPreferences.getAll();
-        List<String> logs = new ArrayList<>();
-        List<String> keys = new ArrayList<>();
+        List<HistoryEntry> historyEntries = new ArrayList<>();
         
-        // Vamos guardar a chave para poder excluir individualmente
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            keys.add(entry.getKey());
-            logs.add(entry.getValue().toString());
+            if (entry.getKey().startsWith("log_") && entry.getValue() != null) {
+                historyEntries.add(new HistoryEntry(entry.getKey(), entry.getValue().toString()));
+            }
         }
+
+        historyEntries.sort((first, second) -> Long.compare(second.timestamp, first.timestamp));
         
         View emptyView = findViewById(R.id.textViewVazio);
-        if (logs.isEmpty()) {
+        if (historyEntries.isEmpty()) {
             emptyView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
             emptyView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
-            
-            // Inverter para mostrar os mais recentes primeiro
-            Collections.reverse(logs);
-            Collections.reverse(keys);
-            
+
+            List<String> logs = new ArrayList<>();
+            List<String> keys = new ArrayList<>();
+            for (HistoryEntry entry : historyEntries) {
+                keys.add(entry.key);
+                logs.add(entry.log);
+            }
+
             adapter = new HistoricoAdapter(logs, keys, (key, position) -> {
-                showDeleteDialog(key, position);
+                showDeleteDialog(key, logs.get(position));
             });
             recyclerView.setAdapter(adapter);
         }
     }
 
-    private void showDeleteDialog(String key, int position) {
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Excluir Registro")
-                .setMessage("Deseja remover este cálculo do seu histórico?")
-                .setPositiveButton("Excluir", (dialog, which) -> {
-                    sharedPreferences.edit().remove(key).apply();
-                    loadHistorico();
-                    Toast.makeText(this, "Registro removido", Toast.LENGTH_SHORT).show();
-                })
+    private void showDeleteDialog(String key, String log) {
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_confirm_delete, null);
+        TextView title = dialogView.findViewById(R.id.textDeleteDialogTitle);
+        TextView message = dialogView.findViewById(R.id.textDeleteDialogMessage);
+        TextView details = dialogView.findViewById(R.id.textDeleteDialogDetails);
+
+        title.setText("Excluir registro?");
+        message.setText("Este cálculo será removido do histórico.");
+        details.setText(formatHistoryDetails(log));
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                .setView(dialogView)
                 .setNegativeButton("Cancelar", null)
-                .show();
+                .setPositiveButton("Excluir", (dialogInterface, which) -> deleteHistoryEntry(key, log))
+                .create();
+
+        dialog.setOnShowListener(dialogInterface -> styleDangerDialogButton(dialog));
+        dialog.show();
+    }
+
+    private void showClearHistoryDialog() {
+        Map<String, String> snapshot = getHistorySnapshot();
+        if (snapshot.isEmpty()) {
+            showSnackbar("Não há registros para excluir.", null);
+            return;
+        }
+
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_confirm_delete, null);
+        TextView title = dialogView.findViewById(R.id.textDeleteDialogTitle);
+        TextView message = dialogView.findViewById(R.id.textDeleteDialogMessage);
+        TextView details = dialogView.findViewById(R.id.textDeleteDialogDetails);
+
+        title.setText("Limpar histórico?");
+        message.setText("Todos os cálculos salvos serão removidos.");
+        details.setText(snapshot.size() + " registro(s) serão excluídos do histórico.");
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                .setView(dialogView)
+                .setNegativeButton("Cancelar", null)
+                .setPositiveButton("Limpar", (dialogInterface, which) -> clearHistory(snapshot))
+                .create();
+
+        dialog.setOnShowListener(dialogInterface -> styleDangerDialogButton(dialog));
+        dialog.show();
+    }
+
+    private void deleteHistoryEntry(String key, String log) {
+        sharedPreferences.edit().remove(key).apply();
+        loadHistorico();
+
+        showSnackbar("Registro excluído.", () -> {
+            sharedPreferences.edit().putString(key, log).apply();
+            loadHistorico();
+        });
+    }
+
+    private void clearHistory(Map<String, String> snapshot) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        for (String key : snapshot.keySet()) {
+            editor.remove(key);
+        }
+        editor.apply();
+        loadHistorico();
+
+        showSnackbar("Histórico limpo.", () -> {
+            SharedPreferences.Editor restoreEditor = sharedPreferences.edit();
+            for (Map.Entry<String, String> entry : snapshot.entrySet()) {
+                restoreEditor.putString(entry.getKey(), entry.getValue());
+            }
+            restoreEditor.apply();
+            loadHistorico();
+        });
+    }
+
+    private void showSnackbar(String message, Runnable undoAction) {
+        Snackbar snackbar = Snackbar.make(rootView, message, Snackbar.LENGTH_LONG);
+        snackbar.setAnchorView(findViewById(R.id.bottomNavigation));
+        snackbar.setActionTextColor(0xFFFFCC00);
+
+        if (undoAction != null) {
+            snackbar.setAction("DESFAZER", v -> undoAction.run());
+        }
+
+        snackbar.show();
+    }
+
+    private void styleDangerDialogButton(AlertDialog dialog) {
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        if (positiveButton != null) {
+            positiveButton.setTextColor(0xFFD32F2F);
+        }
+        if (negativeButton != null) {
+            negativeButton.setTextColor(0xFF00387E);
+        }
+    }
+
+    private Map<String, String> getHistorySnapshot() {
+        Map<String, String> snapshot = new HashMap<>();
+        for (Map.Entry<String, ?> entry : sharedPreferences.getAll().entrySet()) {
+            if (entry.getKey().startsWith("log_") && entry.getValue() != null) {
+                snapshot.put(entry.getKey(), entry.getValue().toString());
+            }
+        }
+        return snapshot;
+    }
+
+    private String formatHistoryDetails(String log) {
+        String[] parts = log.split("\\|");
+        if (parts.length < 5) {
+            return "Registro selecionado";
+        }
+
+        return "Contribuinte: " + parts[0]
+                + "\nData: " + parts[1]
+                + "\nResultado: " + parts[2]
+                + "\nValor: " + parts[3]
+                + "\nIRRF: " + parts[4];
     }
 
     private void setupNavigation() {
@@ -115,6 +229,26 @@ public class HistoricoActivity extends AppCompatActivity {
 
     private interface OnItemActionClickListener {
         void onDeleteClick(String key, int position);
+    }
+
+    private static class HistoryEntry {
+        final String key;
+        final String log;
+        final long timestamp;
+
+        HistoryEntry(String key, String log) {
+            this.key = key;
+            this.log = log;
+            this.timestamp = parseTimestamp(key);
+        }
+
+        private static long parseTimestamp(String key) {
+            try {
+                return Long.parseLong(key.substring(4));
+            } catch (Exception e) {
+                return 0;
+            }
+        }
     }
 
     private static class HistoricoAdapter extends RecyclerView.Adapter<HistoricoAdapter.ViewHolder> {
