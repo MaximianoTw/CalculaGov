@@ -17,10 +17,6 @@ Capturas realizadas no emulador Android com dados demonstrativos.
 |---|---|---|
 | <img src="docs/screenshots/04-simulador.png" width="220" alt="Simulador de imposto de renda"> | <img src="docs/screenshots/05-resultado.png" width="220" alt="Resultado da simulação de imposto"> | <img src="docs/screenshots/06-historico.png" width="220" alt="Histórico de cálculos"> |
 
-| Exclusão de registro |
-|---|
-| <img src="docs/screenshots/07-excluir-registro.png" width="220" alt="Confirmação de exclusão de registro"> |
-
 ---
 
 ## 📑 1. DIAGNÓSTICO E TEORIZAÇÃO
